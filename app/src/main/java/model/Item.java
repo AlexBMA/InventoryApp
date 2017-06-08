@@ -8,5 +8,7 @@ public class Item {
 
     private long id;
     private String name;
-    private int price;
+    private int value;
+    private int stock;
+
 }

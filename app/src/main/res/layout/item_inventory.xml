@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:textAppearanceMedium"
             tools:text="Price" />
+
     </LinearLayout>
 
     <Button
