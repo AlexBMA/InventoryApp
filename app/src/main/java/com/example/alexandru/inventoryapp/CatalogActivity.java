@@ -1,6 +1,5 @@
 package com.example.alexandru.inventoryapp;
 
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -9,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -45,7 +45,7 @@ public class CatalogActivity extends AppCompatActivity {
 
         InventoryDbHelper dbHelper = new InventoryDbHelper(getApplicationContext());
         SQLiteDatabase database = dbHelper.getReadableDatabase();
-        getAllItemFromInvetory(database, projection);
+        getAllItemFromInventory(database, projection);
 
         dbHelper.close();
     }
@@ -70,7 +70,7 @@ public class CatalogActivity extends AppCompatActivity {
             }
             // Respond to a click on the "Delete all entries" menu option
             case R.id.action_delete_all_entries: {
-                //deleteAllPets();
+                deleteAllPets();
                 return true;
             }
 
@@ -78,9 +78,23 @@ public class CatalogActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    private void deleteAllPets() {
+
+        Log.e("TAG", "in delete method");
+        InventoryDbHelper dbHelper = new InventoryDbHelper(getApplicationContext());
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+
+        database.delete(InventoryContact.ItemEntry.TABLE_NAME, null, null);
+        database.close();
+
+        tv = (TextView) findViewById(R.id.text_view_all);
+        tv.setText("");
+    }
+
 
     private void insetItem() {
 
+        Log.e("TAG", "in insert method");
         Item temp = new Item();
 
         double random = Math.random() * 100 + 1;
@@ -97,18 +111,18 @@ public class CatalogActivity extends AppCompatActivity {
         setDataForInsert(temp, valuesForInsert);
 
 
-        //database.insert(InventoryContact.ItemEntry.TABLE_NAME, null, valuesForInsert);
+        database.insert(InventoryContact.ItemEntry.TABLE_NAME, null, valuesForInsert);
 
 
-        getContentResolver().insert(null, valuesForInsert);
 
         String[] projection = getStringsProjection();
 
         tv = (TextView) findViewById(R.id.text_view_all);
 
-        getAllItemFromInvetory(database, projection);
+        getAllItemFromInventory(database, projection);
 
         dbHelper.close();
+
     }
 
     @NonNull
@@ -122,7 +136,7 @@ public class CatalogActivity extends AppCompatActivity {
         };
     }
 
-    private void getAllItemFromInvetory(SQLiteDatabase database, String[] projection) {
+    private void getAllItemFromInventory(SQLiteDatabase database, String[] projection) {
         Cursor c = database.query(InventoryContact.ItemEntry.TABLE_NAME, projection, null, null, null, null, null);
 
         tv.setText("");
@@ -134,7 +148,8 @@ public class CatalogActivity extends AppCompatActivity {
             text = text + c.getString(c.getColumnIndex(InventoryContact.ItemEntry.ID)) + " ";
             text = text + c.getString(c.getColumnIndex(InventoryContact.ItemEntry.COLUMN_NAME)) + "\n";
             tv.setText(text);
-            c.moveToPosition(i);
+
+            c.moveToNext();
         }
     }
 
@@ -145,20 +160,5 @@ public class CatalogActivity extends AppCompatActivity {
         values.put(InventoryContact.ItemEntry.COLUMN_STOCK, item.getStock());
     }
 
-    public Cursor getAllItemsContentResolver(ContentResolver contentResolver) {
 
-
-        String[] projection = {
-                InventoryContact.ItemEntry._ID,
-                InventoryContact.ItemEntry.COLUMN_NAME,
-                InventoryContact.ItemEntry.COLUMN_SALES,
-                InventoryContact.ItemEntry.COLUMN_VALUE,
-                InventoryContact.ItemEntry.COLUMN_STOCK
-        };
-
-
-        //  Cursor c = contentResolver.query(PetContact.PetEntry.CONTENT_URI, projection, null, null, null);
-
-        return null;
-    }
 }
