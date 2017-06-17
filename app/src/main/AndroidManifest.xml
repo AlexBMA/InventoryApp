@@ -25,6 +25,12 @@
                 android:value=".CatalogActivity" />
 
         </activity>
+
+        <provider
+            android:name="data.ItemProvider"
+            android:authorities="com.example.alexandru.data.ItemProvider"
+            android:enabled="true"
+            android:exported="false" />
     </application>
 
 </manifest>

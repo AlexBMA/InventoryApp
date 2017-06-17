@@ -97,11 +97,10 @@ public class CatalogActivity extends AppCompatActivity {
         setDataForInsert(temp, valuesForInsert);
 
 
-        database.insert(InventoryContact.ItemEntry.TABLE_NAME, null, valuesForInsert);
+        //database.insert(InventoryContact.ItemEntry.TABLE_NAME, null, valuesForInsert);
 
-        //ItemProvider itemProvider = new ItemProvider();
-        //itemProvider.onCreate();
-        //itemProvider.insert(null,valuesForInsert);
+
+        getContentResolver().insert(null, valuesForInsert);
 
         String[] projection = getStringsProjection();
 
