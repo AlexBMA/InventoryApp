@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_view_margin"
+            android:layout_weight="1"
             android:textAppearance="?android:textAppearanceMedium"
             tools:text="Item name" />
 
@@ -22,6 +23,7 @@
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:inputType="text"
             android:textAppearance="?android:textAppearanceMedium" />
 
@@ -39,18 +41,43 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_view_margin"
+            android:layout_weight="1"
             android:textAppearance="?android:textAppearanceMedium"
             tools:text="Quantity" />
 
         <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:inputType="number"
             android:textAppearance="?android:textAppearanceMedium" />
 
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_view_margin"
+            android:layout_weight="1"
+            android:textAppearance="?android:textAppearanceMedium"
+            tools:text="Price" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:textAppearance="?android:textAppearanceMedium" />
+
+
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -60,11 +87,13 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             tools:text="Order more" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:text="Delete item" />
 
 
