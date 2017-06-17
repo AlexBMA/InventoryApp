@@ -16,8 +16,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_view_margin"
             android:layout_weight="1"
-            android:textAppearance="?android:textAppearanceMedium"
-            tools:text="Item name" />
+            android:text="Item name"
+            android:textAppearance="?android:textAppearanceMedium" />
 
 
         <EditText
@@ -42,8 +42,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_view_margin"
             android:layout_weight="1"
-            android:textAppearance="?android:textAppearanceMedium"
-            tools:text="Quantity" />
+            android:text="Quantity"
+            android:textAppearance="?android:textAppearanceMedium" />
 
         <EditText
             android:layout_width="wrap_content"
@@ -66,8 +66,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/text_view_margin"
             android:layout_weight="1"
-            android:textAppearance="?android:textAppearanceMedium"
-            tools:text="Price" />
+            android:text="Price"
+            android:textAppearance="?android:textAppearanceMedium" />
 
         <EditText
             android:layout_width="wrap_content"
