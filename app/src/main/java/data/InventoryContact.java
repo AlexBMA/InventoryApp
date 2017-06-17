@@ -6,7 +6,7 @@ import android.provider.BaseColumns;
  * Created by Alexandru on 6/8/2017.
  */
 
-public final class ItemContact {
+public final class InventoryContact {
 
 
     public abstract class ItemEntry implements BaseColumns {
@@ -37,6 +37,8 @@ public final class ItemContact {
 
         public static final String ID = BaseColumns._ID;
         public static final String COLUMN_NAME = "name";
+        public static final String COLUMN_EMAIL = "email";
+
 
     }
 }

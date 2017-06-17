@@ -12,6 +12,7 @@ public class Item {
     private String name;
     private int value;
     private int stock;
+    private int sales;
     private byte[] imgSrc;
 
 
@@ -59,6 +60,14 @@ public class Item {
         this.imgSrc = imgSrc;
     }
 
+    public int getSales() {
+        return sales;
+    }
+
+    public void setSales(int sales) {
+        this.sales = sales;
+    }
+
     @Override
     public String toString() {
         return "Item{" +
@@ -66,6 +75,7 @@ public class Item {
                 ", name='" + name + '\'' +
                 ", value=" + value +
                 ", stock=" + stock +
+                ", sales=" + sales +
                 ", imgSrc=" + Arrays.toString(imgSrc) +
                 '}';
     }
