@@ -1,5 +1,7 @@
 package model;
 
+import java.util.Arrays;
+
 /**
  * Created by Alexandru on 6/5/2017.
  */
@@ -10,6 +12,7 @@ public class Item {
     private String name;
     private int value;
     private int stock;
+    private byte[] imgSrc;
 
 
     public Item() {
@@ -48,6 +51,14 @@ public class Item {
         this.stock = stock;
     }
 
+    public byte[] getImgSrc() {
+        return imgSrc;
+    }
+
+    public void setImgSrc(byte[] imgSrc) {
+        this.imgSrc = imgSrc;
+    }
+
     @Override
     public String toString() {
         return "Item{" +
@@ -55,6 +66,7 @@ public class Item {
                 ", name='" + name + '\'' +
                 ", value=" + value +
                 ", stock=" + stock +
+                ", imgSrc=" + Arrays.toString(imgSrc) +
                 '}';
     }
 }
