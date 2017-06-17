@@ -24,7 +24,7 @@ public final class InventoryContact {
 
     public abstract class ItemSupplierEntry {
 
-        public static final String TABLE_NAME = "supplier";
+        public static final String TABLE_NAME = "itemSupplier";
 
         public static final String ID_ITEM = "id_item";
         public static final String ID_SUPPLIER = "id_supplier";

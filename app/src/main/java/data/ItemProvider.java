@@ -28,7 +28,12 @@ public class ItemProvider extends ContentProvider {
 
         SQLiteDatabase database = mDbHelper.getReadableDatabase();
 
-        return null;
+        // cursor = database.query(PetContact.PetEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+        Cursor cursor = database.query(InventoryContact.ItemEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+
+        //cursor.setNotificationUri(getContext().getContentResolver(), uri);
+
+        return cursor;
     }
 
     @Nullable
@@ -44,6 +49,8 @@ public class ItemProvider extends ContentProvider {
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
 
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
+
+        database.insert(InventoryContact.ItemEntry.TABLE_NAME, null, values);
 
         return null;
     }

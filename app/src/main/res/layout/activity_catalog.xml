@@ -4,14 +4,22 @@
     android:layout_height="match_parent"
     tools:context=".CatalogActivity">
 
-    <ListView
-        android:id="@+id/list_pets"
+    <TextView
+        android:id="@+id/text_view_all"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:divider="@null">
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        tools:text="not" />
 
-    </ListView>
+    <!--
+        <ListView
+            android:id="@+id/list_pets"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@null">
 
+        </ListView>
+    -->
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/button_add"
         android:layout_width="wrap_content"

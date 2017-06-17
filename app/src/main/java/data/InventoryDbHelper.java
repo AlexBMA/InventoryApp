@@ -33,16 +33,16 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
 
 
         String SOL_CREATE_SUPPLIER_TABLE = "CREATE TABLE " + InventoryContact.SupplierEntry.TABLE_NAME + " ("
-                + InventoryContact.SupplierEntry.ID + "  INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,"
-                + InventoryContact.SupplierEntry.COLUMN_NAME + " TEXT NOT NULL"
-                + InventoryContact.SupplierEntry.COLUMN_EMAIL + "TEXT NOT NULL";
+                + InventoryContact.SupplierEntry.ID + "  INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, "
+                + InventoryContact.SupplierEntry.COLUMN_NAME + " TEXT NOT NULL, "
+                + InventoryContact.SupplierEntry.COLUMN_EMAIL + " TEXT NOT NULL );";
 
         db.execSQL(SOL_CREATE_SUPPLIER_TABLE);
 
 
         String SQL_CREATE_ITEM_SUPPLIER_TABLE = "CREATE TABLE " + InventoryContact.ItemSupplierEntry.TABLE_NAME + " ("
-                + InventoryContact.ItemSupplierEntry.ID_ITEM + "INTEGER, "
-                + InventoryContact.ItemSupplierEntry.ID_SUPPLIER + "INTEGER);";
+                + InventoryContact.ItemSupplierEntry.ID_ITEM + " INTEGER , "
+                + InventoryContact.ItemSupplierEntry.ID_SUPPLIER + " INTEGER );";
 
         db.execSQL(SQL_CREATE_ITEM_SUPPLIER_TABLE);
 
