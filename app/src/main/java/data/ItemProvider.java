@@ -34,12 +34,17 @@ public class ItemProvider extends ContentProvider {
     @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
+
         return null;
+
     }
 
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
+
+        SQLiteDatabase database = mDbHelper.getWritableDatabase();
+
         return null;
     }
 
@@ -54,7 +59,7 @@ public class ItemProvider extends ContentProvider {
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
 
-        SQLiteDatabase database = mDbHelper.getReadableDatabase();
+        SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
         return 0;
     }
