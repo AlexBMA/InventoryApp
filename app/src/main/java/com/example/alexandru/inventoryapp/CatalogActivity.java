@@ -99,12 +99,17 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
     private void deleteAllPets() {
 
-        Log.e("TAG", "in delete method");
+        int rez = getContentResolver().delete(InventoryContact.ItemEntry.CONTENT_URI, null, null);
+
+        Log.e("items deleted", rez + "");
+
+        /*Log.e("TAG", "in delete method");
         InventoryDbHelper dbHelper = new InventoryDbHelper(getApplicationContext());
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         database.delete(InventoryContact.ItemEntry.TABLE_NAME, null, null);
         database.close();
+        */
 
         // tv = (TextView) findViewById(R.id.text_view_all);
         //  tv.setText("");

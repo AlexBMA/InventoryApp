@@ -83,6 +83,15 @@ public class ItemProvider extends ContentProvider {
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
 
         SQLiteDatabase database = mDbHelper.getReadableDatabase();
+        int match = sUriMatcher.match(uri);
+
+        switch (match) {
+            case ITEMS:
+                int rezDeleteAll = database.delete(InventoryContact.ItemEntry.TABLE_NAME, null, null);
+                if (rezDeleteAll != 0) getContext().getContentResolver().notifyChange(uri, null);
+                return rezDeleteAll;
+        }
+
 
         return 0;
     }
