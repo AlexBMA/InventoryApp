@@ -1,7 +1,10 @@
 package com.example.alexandru.inventoryapp;
 
+import android.app.LoaderManager;
 import android.content.ContentValues;
+import android.content.CursorLoader;
 import android.content.Intent;
+import android.content.Loader;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -12,15 +15,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 
+import adapter.ItemCursorAdapter;
 import data.InventoryContact;
 import data.InventoryDbHelper;
 import model.Item;
 
 
-public class CatalogActivity extends AppCompatActivity {
+public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
+    private final int LOADER_INDEX = 1;
+    ItemCursorAdapter itemCursorAdapter;
     private TextView tv;
 
     @Override
@@ -38,14 +45,19 @@ public class CatalogActivity extends AppCompatActivity {
             }
         });
 
-        tv = (TextView) findViewById(R.id.text_view_all);
+
+        itemCursorAdapter = new ItemCursorAdapter(this, null);
+
+        ListView listView = (ListView) findViewById(R.id.list_item);
+        listView.setAdapter(itemCursorAdapter);
+
+        getLoaderManager().initLoader(LOADER_INDEX, null, this);
 
 
-        Cursor cursor = getContentResolver().query(InventoryContact.ItemEntry.CONTENT_URI, null, null, null, null);
+        // Cursor cursor = getContentResolver().query(InventoryContact.ItemEntry.CONTENT_URI, null, null, null, null);
 
-        Log.e("TAG", cursor.getCount() + " <><>");
 
-        putInformationOnScreen(cursor);
+        // putInformationOnScreen(cursor);
 
         //String[] projection = getStringsProjection();
 
@@ -94,8 +106,8 @@ public class CatalogActivity extends AppCompatActivity {
         database.delete(InventoryContact.ItemEntry.TABLE_NAME, null, null);
         database.close();
 
-        tv = (TextView) findViewById(R.id.text_view_all);
-        tv.setText("");
+        // tv = (TextView) findViewById(R.id.text_view_all);
+        //  tv.setText("");
     }
 
 
@@ -117,14 +129,12 @@ public class CatalogActivity extends AppCompatActivity {
         ContentValues valuesForInsert = new ContentValues();
         setDataForInsert(temp, valuesForInsert);
 
-
         database.insert(InventoryContact.ItemEntry.TABLE_NAME, null, valuesForInsert);
-
 
 
         String[] projection = getStringsProjection();
 
-        tv = (TextView) findViewById(R.id.text_view_all);
+        //tv = (TextView) findViewById(R.id.text_view_all);
 
         getAllItemFromInventory(database, projection);
 
@@ -172,4 +182,25 @@ public class CatalogActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+
+        return new CursorLoader(this, InventoryContact.ItemEntry.CONTENT_URI, null, null, null, null);
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        itemCursorAdapter.swapCursor(data);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        itemCursorAdapter.swapCursor(null);
+    }
 }

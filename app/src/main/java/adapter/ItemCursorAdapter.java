@@ -16,9 +16,9 @@ import data.InventoryContact;
  * Created by Alexandru on 6/18/2017.
  */
 
-public class ItemCusorAdapter extends CursorAdapter {
+public class ItemCursorAdapter extends CursorAdapter {
 
-    public ItemCusorAdapter(Context context, Cursor c) {
+    public ItemCursorAdapter(Context context, Cursor c) {
         super(context, c, 0);
     }
 
