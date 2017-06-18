@@ -1,6 +1,7 @@
 package data;
 
 import android.content.ContentProvider;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
@@ -8,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 /**
  * Created by Alexandru on 6/8/2017.
@@ -15,8 +17,8 @@ import android.support.annotation.Nullable;
 
 public class ItemProvider extends ContentProvider {
 
+    public static final String LOG_TAG = ItemProvider.class.getSimpleName();
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-
     /**
      * URI matcher code for the content URI for the pets table
      */
@@ -52,10 +54,9 @@ public class ItemProvider extends ContentProvider {
 
         SQLiteDatabase database = mDbHelper.getReadableDatabase();
 
-        // cursor = database.query(PetContact.PetEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
         Cursor cursor = database.query(InventoryContact.ItemEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+        cursor.setNotificationUri(getContext().getContentResolver(), uri);
 
-        //cursor.setNotificationUri(getContext().getContentResolver(), uri);
 
         return cursor;
     }
@@ -74,9 +75,17 @@ public class ItemProvider extends ContentProvider {
 
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
-        database.insert(InventoryContact.ItemEntry.TABLE_NAME, null, values);
+        long newId = database.insert(InventoryContact.ItemEntry.TABLE_NAME, null, values);
 
-        return null;
+
+        if (newId == -1) {
+            Log.e(LOG_TAG, "Failed to insert row for " + uri);
+            return null;
+        }
+
+        getContext().getContentResolver().notifyChange(uri, null);
+
+        return ContentUris.withAppendedId(uri, newId);
     }
 
     @Override

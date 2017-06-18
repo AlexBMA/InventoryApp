@@ -20,7 +20,6 @@ import android.widget.TextView;
 
 import adapter.ItemCursorAdapter;
 import data.InventoryContact;
-import data.InventoryDbHelper;
 import model.Item;
 
 
@@ -128,22 +127,20 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         temp.setValue((int) random);
         temp.setSales(0);
 
-        InventoryDbHelper dbHelper = new InventoryDbHelper(getApplicationContext());
-        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        //InventoryDbHelper dbHelper = new InventoryDbHelper(getApplicationContext());
+        //SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         ContentValues valuesForInsert = new ContentValues();
         setDataForInsert(temp, valuesForInsert);
 
-        database.insert(InventoryContact.ItemEntry.TABLE_NAME, null, valuesForInsert);
+        getContentResolver().insert(InventoryContact.ItemEntry.CONTENT_URI, valuesForInsert);
 
 
-        String[] projection = getStringsProjection();
-
+        //database.insert(InventoryContact.ItemEntry.TABLE_NAME, null, valuesForInsert);
+        //String[] projection = getStringsProjection();
         //tv = (TextView) findViewById(R.id.text_view_all);
-
-        getAllItemFromInventory(database, projection);
-
-        dbHelper.close();
+        //getAllItemFromInventory(database, projection);
+        //dbHelper.close();
 
     }
 
