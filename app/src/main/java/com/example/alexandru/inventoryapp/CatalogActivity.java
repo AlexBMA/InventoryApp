@@ -41,13 +41,20 @@ public class CatalogActivity extends AppCompatActivity {
         tv = (TextView) findViewById(R.id.text_view_all);
 
 
-        String[] projection = getStringsProjection();
+        Cursor cursor = getContentResolver().query(InventoryContact.ItemEntry.CONTENT_URI, null, null, null, null);
 
-        InventoryDbHelper dbHelper = new InventoryDbHelper(getApplicationContext());
+        Log.e("TAG", cursor.getCount() + " <><>");
+
+        putInformationOnScreen(cursor);
+
+        //String[] projection = getStringsProjection();
+
+       /* InventoryDbHelper dbHelper = new InventoryDbHelper(getApplicationContext());
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         getAllItemFromInventory(database, projection);
 
         dbHelper.close();
+        */
     }
 
     @Override
@@ -139,6 +146,10 @@ public class CatalogActivity extends AppCompatActivity {
     private void getAllItemFromInventory(SQLiteDatabase database, String[] projection) {
         Cursor c = database.query(InventoryContact.ItemEntry.TABLE_NAME, projection, null, null, null, null, null);
 
+        putInformationOnScreen(c);
+    }
+
+    private void putInformationOnScreen(Cursor c) {
         tv.setText("");
 
         c.moveToFirst();

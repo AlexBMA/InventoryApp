@@ -1,5 +1,6 @@
 package data;
 
+import android.net.Uri;
 import android.provider.BaseColumns;
 
 /**
@@ -8,8 +9,12 @@ import android.provider.BaseColumns;
 
 public final class InventoryContact {
 
+    public static final String CONTENT_AUTHORITY = "com.example.alexandru.data.ItemProvider";
+    public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
+    public static final String PATH_ITEMS = "inventory";
 
-    public abstract class ItemEntry implements BaseColumns {
+
+    public static abstract class ItemEntry implements BaseColumns {
 
         public static final String TABLE_NAME = "items";
 
@@ -19,10 +24,13 @@ public final class InventoryContact {
         public static final String COLUMN_STOCK = "stock";
         public static final String COLUMN_SALES = "sales";
 
+        public static final String PATH_ITEMS = "inventory";
 
+        public static final Uri CONTENT_URI = Uri.withAppendedPath(BASE_CONTENT_URI, PATH_ITEMS);
     }
 
-    public abstract class ItemSupplierEntry {
+
+    public static abstract class ItemSupplierEntry {
 
         public static final String TABLE_NAME = "itemSupplier";
 
@@ -31,7 +39,7 @@ public final class InventoryContact {
     }
 
 
-    public abstract class SupplierEntry implements BaseColumns {
+    public static abstract class SupplierEntry implements BaseColumns {
 
         public static final String TABLE_NAME = "supplier";
 
