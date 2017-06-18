@@ -16,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import adapter.ItemCursorAdapter;
 import data.InventoryContact;
@@ -27,7 +26,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
     private final int LOADER_INDEX = 1;
     ItemCursorAdapter itemCursorAdapter;
-    private TextView tv;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -158,23 +157,23 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     private void getAllItemFromInventory(SQLiteDatabase database, String[] projection) {
         Cursor c = database.query(InventoryContact.ItemEntry.TABLE_NAME, projection, null, null, null, null, null);
 
-        putInformationOnScreen(c);
+        //  putInformationOnScreen(c);
     }
 
+    /*
     private void putInformationOnScreen(Cursor c) {
-        tv.setText("");
+
 
         c.moveToFirst();
         int size = c.getCount();
         for (int i = 1; i < size; i++) {
-            String text = tv.getText().toString();
+            String text = "";
             text = text + c.getString(c.getColumnIndex(InventoryContact.ItemEntry.ID)) + " ";
             text = text + c.getString(c.getColumnIndex(InventoryContact.ItemEntry.COLUMN_NAME)) + "\n";
-            tv.setText(text);
-
             c.moveToNext();
         }
     }
+    */
 
     private void setDataForInsert(Item item, ContentValues values) {
         values.put(InventoryContact.ItemEntry.COLUMN_NAME, item.getName());
