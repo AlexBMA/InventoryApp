@@ -1,20 +1,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="@dimen/activity_margin"
-    tools:context=".CatalogActivity">
+    android:layout_height="match_parent">
+        android:layout_margin="@dimen/activity_margin"
+        tools:context=".CatalogActivity">
 
-    <!--
-    <TextView
-        android:id="@+id/text_view_all"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        tools:text="not" />
+        <!--
+        <TextView
+            android:id="@+id/text_view_all"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            tools:text="not" />
         -->
-
-
         <ListView
             android:id="@+id/list_item"
             android:layout_width="match_parent"
@@ -23,11 +20,18 @@
 
         </ListView>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/button_add"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/button_add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true" />
 
 </RelativeLayout>
+
+
+
+
+
+

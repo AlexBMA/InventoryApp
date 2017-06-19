@@ -8,4 +8,7 @@
     <!-- Label for overflow menu option that deletes all pet data in the app [CHAR LIMIT=20] -->
     <string name="action_delete_all_entries">Delete All Pets</string>
 
+    <string name="action_save">Save</string>
+
+    <string name="action_delete">Delete</string>
 </resources>

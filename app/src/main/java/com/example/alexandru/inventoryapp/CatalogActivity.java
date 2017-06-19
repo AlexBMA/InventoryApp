@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import adapter.ItemCursorAdapter;
@@ -49,22 +50,19 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         ListView listView = (ListView) findViewById(R.id.list_item);
         listView.setAdapter(itemCursorAdapter);
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
+                Log.e("TAG", "in the onItemClickListener " + id);
+
+                startActivity(intent);
+            }
+        });
+
         getLoaderManager().initLoader(LOADER_INDEX, null, this);
 
 
-        // Cursor cursor = getContentResolver().query(InventoryContact.ItemEntry.CONTENT_URI, null, null, null, null);
-
-
-        // putInformationOnScreen(cursor);
-
-        //String[] projection = getStringsProjection();
-
-       /* InventoryDbHelper dbHelper = new InventoryDbHelper(getApplicationContext());
-        SQLiteDatabase database = dbHelper.getReadableDatabase();
-        getAllItemFromInventory(database, projection);
-
-        dbHelper.close();
-        */
     }
 
     @Override
@@ -100,6 +98,8 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         int rez = getContentResolver().delete(InventoryContact.ItemEntry.CONTENT_URI, null, null);
 
         Log.e("items deleted", rez + "");
+
+
 
         /*Log.e("TAG", "in delete method");
         InventoryDbHelper dbHelper = new InventoryDbHelper(getApplicationContext());
