@@ -13,7 +13,7 @@ public class Item {
     private int value;
     private int stock;
     private int sales;
-    private byte[] imgSrc;
+    private byte[] imgBytes;
 
 
     public Item() {
@@ -52,12 +52,12 @@ public class Item {
         this.stock = stock;
     }
 
-    public byte[] getImgSrc() {
-        return imgSrc;
+    public byte[] getImgBytes() {
+        return imgBytes;
     }
 
-    public void setImgSrc(byte[] imgSrc) {
-        this.imgSrc = imgSrc;
+    public void setImgBytes(byte[] imgBytes) {
+        this.imgBytes = imgBytes;
     }
 
     public int getSales() {
@@ -76,7 +76,7 @@ public class Item {
                 ", value=" + value +
                 ", stock=" + stock +
                 ", sales=" + sales +
-                ", imgSrc=" + Arrays.toString(imgSrc) +
+                ", imgBytes=" + Arrays.toString(imgBytes) +
                 '}';
     }
 }

@@ -53,16 +53,26 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
-                Log.e("TAG", "in the onItemClickListener " + id);
+                //Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
+                //Log.e("TAG", "in the onItemClickListener " + id);
 
-                startActivity(intent);
+                //startActivity(intent);
+                openImageChooser();
             }
         });
 
         getLoaderManager().initLoader(LOADER_INDEX, null, this);
 
 
+    }
+
+    // Choose an image from Gallery
+    void openImageChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivity(intent);
+        // startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
     }
 
     @Override
@@ -125,6 +135,9 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         temp.setStock(20);
         temp.setValue((int) random);
         temp.setSales(0);
+
+        //  int img = R.mipmap.ic_launcher_round;
+        // Bitmap bitmap = R.mipmap.ic_launcher_round;
 
         //InventoryDbHelper dbHelper = new InventoryDbHelper(getApplicationContext());
         //SQLiteDatabase database = dbHelper.getWritableDatabase();

@@ -2,6 +2,7 @@ package com.example.alexandru.inventoryapp;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
@@ -61,6 +62,8 @@ public class EditorActivity extends AppCompatActivity {
 
     private void saveOrUpdateItem() {
 
+        String name = itemName.getText().toString();
+        Log.e("", "");
     }
 
 }
