@@ -1,5 +1,7 @@
 package com.example.alexandru.inventoryapp;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -7,12 +9,17 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 public class EditorActivity extends AppCompatActivity {
 
 
     protected EditText itemName;
     protected EditText itemPrice;
     protected EditText itemQuantity;
+
+    protected byte[] imgBytes;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +33,30 @@ public class EditorActivity extends AppCompatActivity {
         itemQuantity = (EditText) findViewById(R.id.edit_item_quantity);
 
 
+        Intent intent = getIntent();
+        Uri selectedImageUri = intent.getData();
+        if (selectedImageUri != null) {
+            Log.e("IMG_Editor_Activity", selectedImageUri.toString());
+
+            getImgFromUri(selectedImageUri);
+        }
+
+
+
     }
+
+    private void getImgFromUri(Uri selectedImageUri) {
+
+        try {
+            InputStream iStream = getContentResolver().openInputStream(selectedImageUri);
+            //imgBytes = utils.getBytes(iStream);
+
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

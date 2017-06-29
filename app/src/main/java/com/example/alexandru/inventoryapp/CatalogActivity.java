@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -25,9 +26,9 @@ import model.Item;
 
 public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
+    private static final int SELECT_PICTURE = 100;
     private final int LOADER_INDEX = 1;
     ItemCursorAdapter itemCursorAdapter;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,8 +40,9 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
-                startActivity(intent);
+
+                openImageChooser();
+
             }
         });
 
@@ -53,11 +55,11 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
-                //Log.e("TAG", "in the onItemClickListener " + id);
+                Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
+                Log.e("TAG", "in the onItemClickListener " + id);
 
-                //startActivity(intent);
-                openImageChooser();
+                startActivity(intent);
+
             }
         });
 
@@ -71,9 +73,31 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivity(intent);
-        // startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
+        //startActivity(intent);
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
+
+
     }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            if (requestCode == SELECT_PICTURE) {
+
+                Uri selectedImageUri = data.getData();
+
+                if (selectedImageUri != null) {
+
+                    Log.e("IMG", selectedImageUri.toString());
+                    Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
+                    intent.setData(selectedImageUri);
+                    startActivity(intent);
+
+                }
+
+            }
+        }
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
