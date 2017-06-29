@@ -19,8 +19,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+
 import adapter.ItemCursorAdapter;
 import data.InventoryContact;
+import helperpack.Utils;
 import model.Item;
 
 
@@ -159,6 +164,21 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         temp.setStock(20);
         temp.setValue((int) random);
         temp.setSales(0);
+
+        String uriString = "content://com.android.providers.media.documents/document/image%3A16357";
+
+        Uri imgUriDefault = Uri.parse(uriString);
+        try {
+            InputStream iStream = getContentResolver().openInputStream(imgUriDefault);
+            byte[] imgBytes = Utils.getBytes(iStream);
+            temp.setImgBytes(imgBytes);
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         //  int img = R.mipmap.ic_launcher_round;
         // Bitmap bitmap = R.mipmap.ic_launcher_round;
