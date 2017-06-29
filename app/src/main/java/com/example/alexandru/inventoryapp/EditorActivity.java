@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -21,8 +22,9 @@ public class EditorActivity extends AppCompatActivity {
     protected EditText itemName;
     protected EditText itemPrice;
     protected EditText itemQuantity;
-
+    protected ImageView imageView;
     protected byte[] imgBytes;
+    private Uri selectedImageUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +36,18 @@ public class EditorActivity extends AppCompatActivity {
         itemName = (EditText) findViewById(R.id.edit_item_name);
         itemPrice = (EditText) findViewById(R.id.edit_item_price);
         itemQuantity = (EditText) findViewById(R.id.edit_item_quantity);
+        imageView = (ImageView) findViewById(R.id.image_view_item);
 
 
         Intent intent = getIntent();
-        Uri selectedImageUri = intent.getData();
+        selectedImageUri = intent.getData();
         if (selectedImageUri != null) {
             Log.e("IMG_Editor_Activity", selectedImageUri.toString());
-
             getImgFromUri(selectedImageUri);
+
+            imageView.setImageURI(selectedImageUri);
+            // imageView.setImageBitmap(Utils.getImage(imgBytes));
+
         }
 
 
