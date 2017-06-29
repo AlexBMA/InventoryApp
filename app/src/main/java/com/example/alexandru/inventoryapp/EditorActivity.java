@@ -10,7 +10,10 @@ import android.view.MenuItem;
 import android.widget.EditText;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
+
+import helperpack.Utils;
 
 public class EditorActivity extends AppCompatActivity {
 
@@ -49,10 +52,12 @@ public class EditorActivity extends AppCompatActivity {
 
         try {
             InputStream iStream = getContentResolver().openInputStream(selectedImageUri);
-            //imgBytes = utils.getBytes(iStream);
+            imgBytes = Utils.getBytes(iStream);
 
 
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
