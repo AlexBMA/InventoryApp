@@ -209,6 +209,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
                 InventoryContact.ItemEntry.COLUMN_VALUE,
                 InventoryContact.ItemEntry.COLUMN_STOCK
         };
+
     }
 
     private void getAllItemFromInventory(SQLiteDatabase database, String[] projection) {

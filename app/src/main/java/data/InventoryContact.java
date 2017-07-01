@@ -23,7 +23,7 @@ public final class InventoryContact {
         public static final String COLUMN_VALUE = "value";
         public static final String COLUMN_STOCK = "stock";
         public static final String COLUMN_SALES = "sales";
-        public static final String COLUMN_BYTES = "img";
+        public static final String COLUMN_IMG_BYTES = "img";
 
         public static final String PATH_ITEMS = "inventory";
 

@@ -1,5 +1,6 @@
 package com.example.alexandru.inventoryapp;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -14,7 +15,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+import data.InventoryContact;
 import helperpack.Utils;
+import model.Item;
 
 public class EditorActivity extends AppCompatActivity {
 
@@ -23,7 +26,6 @@ public class EditorActivity extends AppCompatActivity {
     protected EditText itemPrice;
     protected EditText itemQuantity;
     protected ImageView imageView;
-    protected byte[] imgBytes;
     private Uri selectedImageUri;
 
     @Override
@@ -43,7 +45,7 @@ public class EditorActivity extends AppCompatActivity {
         selectedImageUri = intent.getData();
         if (selectedImageUri != null) {
             Log.e("IMG_Editor_Activity", selectedImageUri.toString());
-            getImgFromUri(selectedImageUri);
+            // getImgFromUri(selectedImageUri);
 
             imageView.setImageURI(selectedImageUri);
             // imageView.setImageBitmap(Utils.getImage(imgBytes));
@@ -54,18 +56,20 @@ public class EditorActivity extends AppCompatActivity {
 
     }
 
-    private void getImgFromUri(Uri selectedImageUri) {
+    private byte[] getImgFromUri(Uri selectedImageUri) {
 
         try {
             InputStream iStream = getContentResolver().openInputStream(selectedImageUri);
-            imgBytes = Utils.getBytes(iStream);
-
+            byte[] imgBytes = Utils.getBytes(iStream);
+            Log.e("TAG", " all good");
+            return imgBytes;
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
 
@@ -79,12 +83,16 @@ public class EditorActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        Log.e("TAG", "%% ##");
+
 
         // User clicked on a menu option in the app bar overflow menu
         switch (item.getItemId()) {
             // Respond to a click on the "Insert dummy data" menu option
             case R.id.action_save: {
+                Log.e("TAG", "save press");
                 saveOrUpdateItem();
+                finish();
                 return true;
             }
             // Respond to a click on the "Delete all entries" menu option
@@ -104,7 +112,29 @@ public class EditorActivity extends AppCompatActivity {
     private void saveOrUpdateItem() {
 
         String name = itemName.getText().toString();
-        Log.e("", "");
+        int value = Integer.parseInt(itemPrice.getText().toString());
+        byte[] imgBytes = getImgFromUri(selectedImageUri);
+
+        Item temp = new Item();
+
+        temp.setName(name);
+        temp.setStock(20);
+        temp.setValue(value);
+        temp.setSales(0);
+        temp.setImgBytes(imgBytes);
+
+        ContentValues valuesForInsert = new ContentValues();
+        setDataForInsert(temp, valuesForInsert);
+        getContentResolver().insert(InventoryContact.ItemEntry.CONTENT_URI, valuesForInsert);
+
     }
 
+
+    private void setDataForInsert(Item item, ContentValues values) {
+        values.put(InventoryContact.ItemEntry.COLUMN_NAME, item.getName());
+        values.put(InventoryContact.ItemEntry.COLUMN_SALES, item.getSales());
+        values.put(InventoryContact.ItemEntry.COLUMN_VALUE, item.getValue());
+        values.put(InventoryContact.ItemEntry.COLUMN_STOCK, item.getStock());
+        values.put(InventoryContact.ItemEntry.COLUMN_IMG_BYTES, item.getImgBytes());
+    }
 }
