@@ -54,11 +54,29 @@ public class ItemProvider extends ContentProvider {
 
         SQLiteDatabase database = mDbHelper.getReadableDatabase();
 
-        Cursor cursor = database.query(InventoryContact.ItemEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+        Cursor cursor;
+        int match = sUriMatcher.match(uri);
+
+        switch (match) {
+            case ITEMS:
+                cursor = database.query(InventoryContact.ItemEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                break;
+            case ITEM_ID:
+                selection = InventoryContact.ItemEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                cursor = database.query(InventoryContact.ItemEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                break;
+            default:
+                throw new IllegalArgumentException("Cannot query unknown uri" + uri);
+        }
         cursor.setNotificationUri(getContext().getContentResolver(), uri);
 
-
         return cursor;
+
+
+        //Cursor cursor = database.query(InventoryContact.ItemEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+        // cursor.setNotificationUri(getContext().getContentResolver(), uri);
+
     }
 
     @Nullable

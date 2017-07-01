@@ -87,6 +87,29 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/text_view_margin"
+            android:layout_weight="1"
+            android:text="Sales"
+            android:textAppearance="?android:textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/edit_item_sales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:inputType="number"
+            android:textAppearance="?android:textAppearanceMedium" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -101,10 +124,12 @@
 
     </LinearLayout>
 
+
     <ImageView
         android:id="@+id/image_view_item"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:layout_marginTop="@dimen/activity_margin" />
+        android:layout_marginTop="@dimen/img_view_margin"
+        android:scaleType="centerCrop" />
 
 </LinearLayout>

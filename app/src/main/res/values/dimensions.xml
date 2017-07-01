@@ -3,4 +3,5 @@
 
     <dimen name="activity_margin">16dp</dimen>
     <dimen name="text_view_margin">8dp</dimen>
+    <dimen name="img_view_margin">8dp</dimen>
 </resources>

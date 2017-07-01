@@ -24,6 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import adapter.ItemCursorAdapter;
+import constactpack.AppConstants;
 import data.InventoryContact;
 import helperpack.Utils;
 import model.Item;
@@ -62,6 +63,8 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
                 Log.e("TAG", "in the onItemClickListener " + id);
+                Uri editUri = Uri.withAppendedPath(InventoryContact.ItemEntry.CONTENT_URI, id + "");
+                intent.setData(editUri);
 
                 startActivity(intent);
 
@@ -94,7 +97,9 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
                     Log.e("IMG", selectedImageUri.toString());
                     Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
-                    intent.setData(selectedImageUri);
+                    //intent.put
+                    intent.putExtra(AppConstants.IMG_URI_STRING, selectedImageUri.toString());
+                    //intent.setData(selectedImageUri);
                     startActivity(intent);
 
                 }
@@ -119,7 +124,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         switch (item.getItemId()) {
             // Respond to a click on the "Insert dummy data" menu option
             case R.id.action_insert_dummy_data: {
-                insetItem();
+                //  insetItem();
                 return true;
             }
             // Respond to a click on the "Delete all entries" menu option
