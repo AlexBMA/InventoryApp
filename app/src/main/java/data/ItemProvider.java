@@ -126,8 +126,41 @@ public class ItemProvider extends ContentProvider {
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
 
-        SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
-        return 0;
+        final int match = sUriMatcher.match(uri);
+
+        switch (match) {
+            case ITEMS:
+                return updatePet(uri, values, selection, selectionArgs);
+            case ITEM_ID:
+                Log.e("##", "here " + String.valueOf(ContentUris.parseId(uri)));
+
+                // For the PET_ID code, extract out the ID from the URI,
+                // so we know which row to update. Selection will be "_id=?" and selection
+                // arguments will be a String array containing the actual ID.
+                selection = InventoryContact.ItemEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                return updatePet(uri, values, selection, selectionArgs);
+            default:
+                throw new IllegalArgumentException("Update is not supported for " + uri);
+        }
+
     }
+
+    private int updatePet(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+
+        if (values.size() == 0) {
+            return 0;
+        }
+
+        SQLiteDatabase database = mDbHelper.getWritableDatabase();
+        int nrRows = database.update(InventoryContact.ItemEntry.TABLE_NAME, values, selection, selectionArgs);
+
+        if (nrRows != 0) getContext().getContentResolver().notifyChange(uri, null);
+
+        return nrRows;
+
+    }
+
+
 }

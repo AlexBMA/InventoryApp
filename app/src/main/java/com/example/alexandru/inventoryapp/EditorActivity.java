@@ -32,16 +32,17 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     private static final String[] PROJECTION = null;
     // This is the select criteria
     private static final String SELECTION = null;
+
     private static final int LOADER_INDEX = 1;
 
     protected EditText itemName;
-
     protected EditText itemPrice;
     protected EditText itemSales;
     protected EditText itemQuantity;
-
     protected ImageView imageView;
 
+    private long id = -1;
+    private Bitmap image;
 
     private Uri selectedImageUri;
     private Uri selectedITemUri;
@@ -70,6 +71,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         }
 
         if (selectedITemUri != null) {
+            id = intent.getLongExtra(AppConstants.ID_ITEM, -1);
+            Log.e("ID", id + "");
+
             //prepare for edit item
         }
 
@@ -144,19 +148,42 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         String name = itemName.getText().toString();
         int value = Integer.parseInt(itemPrice.getText().toString());
-        byte[] imgBytes = getImgFromUri(selectedImageUri);
 
-        Item temp = new Item();
 
-        temp.setName(name);
-        temp.setStock(20);
-        temp.setValue(value);
-        temp.setSales(0);
-        temp.setImgBytes(imgBytes);
+        Item tempItem = new Item();
 
-        ContentValues valuesForInsert = new ContentValues();
-        setDataForInsert(temp, valuesForInsert);
-        getContentResolver().insert(InventoryContact.ItemEntry.CONTENT_URI, valuesForInsert);
+        tempItem.setName(name);
+        tempItem.setStock(20);
+        tempItem.setValue(value);
+        tempItem.setSales(0);
+
+        if (selectedImageUri != null) {
+            byte[] imgBytes = getImgFromUri(selectedImageUri);
+            tempItem.setImgBytes(imgBytes);
+
+            Log.e("BYTES: from uri", imgBytes.length + "");
+        } else {
+            byte[] imgBytes = Utils.getImageBytes(image);
+            tempItem.setImgBytes(imgBytes);
+            Log.e("BYTES from img:", imgBytes.length + "");
+        }
+
+        ContentValues values = new ContentValues();
+
+        if (id > -1) {
+            tempItem.setId(id);
+            setDataForInsert(tempItem, values);
+            String selection = InventoryContact.ItemEntry._ID + " = ?";
+            String[] selectionArgs = {id + ""};
+            Log.e("ID", id + " &*^");
+            int rez = getContentResolver().update(selectedITemUri, values, selection, selectionArgs);
+            Log.e("Rez:", rez + "");
+
+        } else {
+            setDataForInsert(tempItem, values);
+            getContentResolver().insert(InventoryContact.ItemEntry.CONTENT_URI, values);
+        }
+
 
     }
 
@@ -192,13 +219,13 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             int saleColumnIndex = data.getColumnIndex(InventoryContact.ItemEntry.COLUMN_SALES);
 
 
-            String nameItem = data.getColumnName(nameColumnIndex);
+            String nameItem = data.getString(nameColumnIndex);
             int quantity = data.getInt(quantityColumnIndex);
             int price = data.getInt(priceColumnIndex);
             int sales = data.getInt(saleColumnIndex);
             byte[] imgBytes = data.getBlob(imgBytesColumnIndex);
 
-            Bitmap image = Utils.getImage(imgBytes);
+            image = Utils.getImage(imgBytes);
 
             // Log.e("pirce",price+" $$");
 

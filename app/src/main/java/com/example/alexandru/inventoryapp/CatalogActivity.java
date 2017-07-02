@@ -65,6 +65,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
                 Log.e("TAG", "in the onItemClickListener " + id);
                 Uri editUri = Uri.withAppendedPath(InventoryContact.ItemEntry.CONTENT_URI, id + "");
                 intent.setData(editUri);
+                intent.putExtra(AppConstants.ID_ITEM, id);
 
                 startActivity(intent);
 
