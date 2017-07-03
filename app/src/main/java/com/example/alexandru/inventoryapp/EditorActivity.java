@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -37,15 +38,15 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     protected EditText itemName;
     protected EditText itemPrice;
-    protected EditText itemSales;
-    protected EditText itemQuantity;
+    protected TextView itemSales;
+    protected TextView itemStock;
     protected ImageView imageView;
 
     private long id = -1;
     private Bitmap image;
 
     private Uri selectedImageUri;
-    private Uri selectedITemUri;
+    private Uri selectedItemUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,28 +57,30 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         itemName = (EditText) findViewById(R.id.edit_item_name);
         itemPrice = (EditText) findViewById(R.id.edit_item_price);
-        itemQuantity = (EditText) findViewById(R.id.edit_item_quantity);
-        itemSales = (EditText) findViewById(R.id.edit_item_sales);
+        itemStock = (TextView) findViewById(R.id.text_view_item_stock);
+        itemSales = (TextView) findViewById(R.id.text_view_item_sales);
         imageView = (ImageView) findViewById(R.id.image_view_item);
 
         Intent intent = getIntent();
-        selectedITemUri = intent.getData();
+        selectedItemUri = intent.getData();
 
         String uriImgString = intent.getStringExtra(AppConstants.IMG_URI_STRING);
         if (uriImgString != null) {
             Log.e("IMG_Editor_Activity", uriImgString);
             selectedImageUri = Uri.parse(uriImgString);
             imageView.setImageURI(selectedImageUri);
+            itemStock.setText(String.valueOf(AppConstants.INITIAL_STOCK));
+            itemSales.setText(String.valueOf(AppConstants.INITIAL_SALES));
         }
 
-        if (selectedITemUri != null) {
+        if (selectedItemUri != null) {
             id = intent.getLongExtra(AppConstants.ID_ITEM, -1);
             Log.e("ID", id + "");
 
             //prepare for edit item
         }
 
-       /* if (selectedITemUri != null) {
+       /* if (selectedItemUri != null) {
             Log.e("IMG_Editor_Activity", selectedImageUri.toString());
             // getImgFromUri(selectedImageUri);
 
@@ -132,6 +135,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             }
             // Respond to a click on the "Delete all entries" menu option
             case R.id.action_delete: {
+                Log.e("TAG", "delete press");
                 deleteItem();
                 return true;
             }
@@ -142,6 +146,14 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     private void deleteItem() {
 
+
+        if (id > -1) {
+            String selection = InventoryContact.ItemEntry._ID + " = ?";
+            String[] selectionArgs = {id + ""};
+
+            getContentResolver().delete(selectedItemUri, selection, selectionArgs);
+        }
+        finish();
     }
 
     private void saveOrUpdateItem() {
@@ -153,9 +165,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         Item tempItem = new Item();
 
         tempItem.setName(name);
-        tempItem.setStock(20);
+        tempItem.setStock(AppConstants.INITIAL_STOCK);
         tempItem.setValue(value);
-        tempItem.setSales(0);
+        tempItem.setSales(AppConstants.INITIAL_SALES);
 
         if (selectedImageUri != null) {
             byte[] imgBytes = getImgFromUri(selectedImageUri);
@@ -176,7 +188,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             String selection = InventoryContact.ItemEntry._ID + " = ?";
             String[] selectionArgs = {id + ""};
             Log.e("ID", id + " &*^");
-            int rez = getContentResolver().update(selectedITemUri, values, selection, selectionArgs);
+            int rez = getContentResolver().update(selectedItemUri, values, selection, selectionArgs);
             Log.e("Rez:", rez + "");
 
         } else {
@@ -200,8 +212,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
-        if (selectedITemUri != null)
-            return new CursorLoader(this, selectedITemUri, PROJECTION, SELECTION, null, null);
+        if (selectedItemUri != null)
+            return new CursorLoader(this, selectedItemUri, PROJECTION, SELECTION, null, null);
 
         return null;
 
@@ -233,7 +245,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             itemName.setText(nameItem);
             itemSales.setText(Integer.toString(sales));
             itemPrice.setText(Integer.toString(price));
-            itemQuantity.setText(Integer.toString(quantity));
+            itemStock.setText(Integer.toString(quantity));
         }
     }
 
@@ -243,7 +255,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         // imageView.
         itemName.clearComposingText();
         itemPrice.clearComposingText();
-        itemQuantity.clearComposingText();
+        itemStock.clearComposingText();
 
     }
 }

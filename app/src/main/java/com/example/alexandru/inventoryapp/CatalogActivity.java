@@ -167,9 +167,9 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         double random = Math.random() * 100 + 1;
 
         temp.setName("Item name " + random);
-        temp.setStock(20);
+        temp.setStock(AppConstants.INITIAL_STOCK);
         temp.setValue((int) random);
-        temp.setSales(0);
+        temp.setSales(AppConstants.INITIAL_SALES);
 
         String uriString = "content://com.android.providers.media.documents/document/image%3A16357";
 

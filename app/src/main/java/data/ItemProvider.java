@@ -95,7 +95,6 @@ public class ItemProvider extends ContentProvider {
 
         long newId = database.insert(InventoryContact.ItemEntry.TABLE_NAME, null, values);
 
-
         if (newId == -1) {
             Log.e(LOG_TAG, "Failed to insert row for " + uri);
             return null;
@@ -117,10 +116,15 @@ public class ItemProvider extends ContentProvider {
                 int rezDeleteAll = database.delete(InventoryContact.ItemEntry.TABLE_NAME, null, null);
                 if (rezDeleteAll != 0) getContext().getContentResolver().notifyChange(uri, null);
                 return rezDeleteAll;
+            case ITEM_ID:
+                selection = InventoryContact.ItemEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                int rezDeleteById = database.delete(InventoryContact.ItemEntry.TABLE_NAME, selection, selectionArgs);
+                if (rezDeleteById != 0) getContext().getContentResolver().notifyChange(uri, null);
+                return rezDeleteById;
+            default:
+                throw new IllegalArgumentException("Deletion is not supported for " + uri);
         }
-
-
-        return 0;
     }
 
     @Override
