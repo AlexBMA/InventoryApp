@@ -11,4 +11,12 @@
     <string name="action_save">Save</string>
 
     <string name="action_delete">Delete</string>
+
+    <string name="button_order_more">Order more </string>
+
+    <string name="text_view_price">Price</string>
+    <string name="text_view_sales">Sale</string>
+    <string name="text_view_name">Name</string>
+    <string name="text_view_stock">Quantity</string>
+
 </resources>
