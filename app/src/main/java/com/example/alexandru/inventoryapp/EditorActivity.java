@@ -72,6 +72,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             imageView.setImageURI(selectedImageUri);
             itemStock.setText(String.valueOf(AppConstants.INITIAL_STOCK));
             itemSales.setText(String.valueOf(AppConstants.INITIAL_SALES));
+
+            int itemSales = intent.getIntExtra(AppConstants.ITEM_SALE, -1);
+            Log.e("TAG", " " + itemSales);
         }
 
         if (selectedItemUri != null) {

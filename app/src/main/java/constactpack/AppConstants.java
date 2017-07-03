@@ -9,6 +9,7 @@ public final class AppConstants {
 
     public final static String IMG_URI_STRING = "imgUriString";
     public final static String ID_ITEM = "idItem";
+    public final static String ITEM_SALE = "sales";
 
 
     public final static int INITIAL_STOCK = 10;

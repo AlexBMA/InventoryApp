@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -67,6 +68,10 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
                 intent.setData(editUri);
                 intent.putExtra(AppConstants.ID_ITEM, id);
 
+                TextView textViewSales = (TextView) view.findViewById(R.id.text_view_item_sales);
+                int sales = Integer.parseInt(textViewSales.getText().toString());
+
+                intent.putExtra(AppConstants.ITEM_SALE, sales);
                 startActivity(intent);
 
             }
