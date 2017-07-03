@@ -68,8 +68,8 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
                 intent.setData(editUri);
                 intent.putExtra(AppConstants.ID_ITEM, id);
 
-                TextView textViewSales = (TextView) view.findViewById(R.id.text_view_item_sales);
-                int sales = Integer.parseInt(textViewSales.getText().toString());
+                TextView textViewSales = (TextView) view.findViewById(R.id.text_view_product_sale);
+                int sales = Integer.parseInt(textViewSales.getText().toString().trim());
 
                 intent.putExtra(AppConstants.ITEM_SALE, sales);
                 startActivity(intent);

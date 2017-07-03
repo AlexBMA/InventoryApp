@@ -34,6 +34,6 @@ public class CustomSaleButtonListener implements View.OnClickListener {
         sales = sales + 1;
 
         textView.setText(msg + " " + stock);
-        textView.setText(" " + sales);
+        textView2.setText(" " + sales);
     }
 }

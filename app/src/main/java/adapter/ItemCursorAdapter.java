@@ -39,7 +39,7 @@ public class ItemCursorAdapter extends CursorAdapter {
         TextView tvName = (TextView) view.findViewById(R.id.text_view_product_name);
         TextView tvPrice = (TextView) view.findViewById(R.id.text_view_product_price);
         TextView tvQuantity = (TextView) view.findViewById(R.id.text_view_product_quantity);
-        TextView tvSales = (TextView) view.findViewById(R.id.text_view_item_stock);
+        TextView tvSales = (TextView) view.findViewById(R.id.text_view_product_sale);
         Button button = (Button) view.findViewById(R.id.button_sale);
 
         String name = cursor.getString(cursor.getColumnIndex(InventoryContact.ItemEntry.COLUMN_NAME));
