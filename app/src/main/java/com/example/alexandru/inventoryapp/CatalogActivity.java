@@ -18,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -35,7 +34,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
     private static final int SELECT_PICTURE = 100;
     private final int LOADER_INDEX = 1;
-    ItemCursorAdapter itemCursorAdapter;
+    private ItemCursorAdapter itemCursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,10 +67,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
                 intent.setData(editUri);
                 intent.putExtra(AppConstants.ID_ITEM, id);
 
-                TextView textViewSales = (TextView) view.findViewById(R.id.text_view_product_sale);
-                int sales = Integer.parseInt(textViewSales.getText().toString().trim());
 
-                intent.putExtra(AppConstants.ITEM_SALE, sales);
                 startActivity(intent);
 
             }

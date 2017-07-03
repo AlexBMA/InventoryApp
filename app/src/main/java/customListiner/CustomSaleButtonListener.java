@@ -14,14 +14,13 @@ public class CustomSaleButtonListener implements View.OnClickListener {
     private int stock;
     private String msg;
     private TextView textView;
-    private TextView textView2;
 
-    public CustomSaleButtonListener(int stock, int sales, String msg, TextView textView, TextView textView2) {
+
+    public CustomSaleButtonListener(int stock, int sales, String msg, TextView textView) {
         this.stock = stock;
         this.sales = sales;
         this.msg = msg;
         this.textView = textView;
-        this.textView2 = textView2;
     }
 
     @Override
@@ -30,10 +29,15 @@ public class CustomSaleButtonListener implements View.OnClickListener {
         Log.e("TAG Stock", stock + " ");
         Log.e("TAG Msg", msg);
 
-        stock = stock - 1;
-        sales = sales + 1;
-
+        if (stock > 0) {
+            stock = stock - 1;
+            sales = sales + 1;
+        }
         textView.setText(msg + " " + stock);
-        textView2.setText(" " + sales);
+
+    }
+
+    public int getsales() {
+        return sales;
     }
 }

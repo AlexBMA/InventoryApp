@@ -21,6 +21,7 @@ import data.InventoryContact;
 
 public class ItemCursorAdapter extends CursorAdapter {
 
+
     public ItemCursorAdapter(Context context, Cursor c) {
         super(context, c, 0);
     }
@@ -33,7 +34,7 @@ public class ItemCursorAdapter extends CursorAdapter {
     }
 
     @Override
-    public void bindView(View view, final Context context, Cursor cursor) {
+    public void bindView(View view, Context context, Cursor cursor) {
 
 
         TextView tvName = (TextView) view.findViewById(R.id.text_view_product_name);
@@ -47,6 +48,7 @@ public class ItemCursorAdapter extends CursorAdapter {
         int quantity = cursor.getInt(cursor.getColumnIndex(InventoryContact.ItemEntry.COLUMN_STOCK));
         int sales = cursor.getInt(cursor.getColumnIndex(InventoryContact.ItemEntry.COLUMN_SALES));
 
+
         tvName.setText(context.getString(R.string.text_view_name) + ": " + name);
         tvPrice.setText(context.getString(R.string.text_view_price) + ": " + price);
         tvQuantity.setText(context.getString(R.string.text_view_stock) + ": " + quantity);
@@ -55,7 +57,7 @@ public class ItemCursorAdapter extends CursorAdapter {
         //Log.e("TAG Q", quantity + "");
         //Log.e("TAG M", context.getString(R.string.text_view_stock) + "");
 
-        CustomSaleButtonListener saleListener = new CustomSaleButtonListener(quantity, sales, context.getString(R.string.text_view_stock), tvQuantity, tvSales);
+        CustomSaleButtonListener saleListener = new CustomSaleButtonListener(quantity, sales, context.getString(R.string.text_view_stock), tvQuantity);
         button.setOnClickListener(saleListener);
 
 
