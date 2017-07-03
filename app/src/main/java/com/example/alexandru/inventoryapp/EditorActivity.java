@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -121,7 +122,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        Log.e("TAG", "%% ##");
+        //Log.e("TAG", "%% ##");
 
 
         // User clicked on a menu option in the app bar overflow menu
@@ -172,7 +173,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         if (selectedImageUri != null) {
             byte[] imgBytes = getImgFromUri(selectedImageUri);
             tempItem.setImgBytes(imgBytes);
-
             Log.e("BYTES: from uri", imgBytes.length + "");
         } else {
             byte[] imgBytes = Utils.getImageBytes(image);
@@ -257,5 +257,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         itemPrice.clearComposingText();
         itemStock.clearComposingText();
 
+    }
+
+    public void orderButtonClick(View view) {
+        Log.e("TAG", "order button pressed");
+
+        // Intent intent = new Intent(this,)
     }
 }

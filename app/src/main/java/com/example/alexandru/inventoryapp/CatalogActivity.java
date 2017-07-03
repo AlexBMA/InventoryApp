@@ -140,22 +140,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
     private void deleteAllPets() {
 
-        int rez = getContentResolver().delete(InventoryContact.ItemEntry.CONTENT_URI, null, null);
-
-        Log.e("items deleted", rez + "");
-
-
-
-        /*Log.e("TAG", "in delete method");
-        InventoryDbHelper dbHelper = new InventoryDbHelper(getApplicationContext());
-        SQLiteDatabase database = dbHelper.getWritableDatabase();
-
-        database.delete(InventoryContact.ItemEntry.TABLE_NAME, null, null);
-        database.close();
-        */
-
-        // tv = (TextView) findViewById(R.id.text_view_all);
-        //  tv.setText("");
+        getContentResolver().delete(InventoryContact.ItemEntry.CONTENT_URI, null, null);
     }
 
 
@@ -186,23 +171,11 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         }
 
 
-        //  int img = R.mipmap.ic_launcher_round;
-        // Bitmap bitmap = R.mipmap.ic_launcher_round;
-
-        //InventoryDbHelper dbHelper = new InventoryDbHelper(getApplicationContext());
-        //SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         ContentValues valuesForInsert = new ContentValues();
         setDataForInsert(temp, valuesForInsert);
 
         getContentResolver().insert(InventoryContact.ItemEntry.CONTENT_URI, valuesForInsert);
-
-
-        //database.insert(InventoryContact.ItemEntry.TABLE_NAME, null, valuesForInsert);
-        //String[] projection = getStringsProjection();
-        //tv = (TextView) findViewById(R.id.text_view_all);
-        //getAllItemFromInventory(database, projection);
-        //dbHelper.close();
 
     }
 
@@ -221,23 +194,9 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     private void getAllItemFromInventory(SQLiteDatabase database, String[] projection) {
         Cursor c = database.query(InventoryContact.ItemEntry.TABLE_NAME, projection, null, null, null, null, null);
 
-        //  putInformationOnScreen(c);
+
     }
 
-    /*
-    private void putInformationOnScreen(Cursor c) {
-
-
-        c.moveToFirst();
-        int size = c.getCount();
-        for (int i = 1; i < size; i++) {
-            String text = "";
-            text = text + c.getString(c.getColumnIndex(InventoryContact.ItemEntry.ID)) + " ";
-            text = text + c.getString(c.getColumnIndex(InventoryContact.ItemEntry.COLUMN_NAME)) + "\n";
-            c.moveToNext();
-        }
-    }
-    */
 
     private void setDataForInsert(Item item, ContentValues values) {
         values.put(InventoryContact.ItemEntry.COLUMN_NAME, item.getName());
@@ -268,4 +227,6 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     public void onLoaderReset(Loader<Cursor> loader) {
         itemCursorAdapter.swapCursor(null);
     }
+
+
 }
