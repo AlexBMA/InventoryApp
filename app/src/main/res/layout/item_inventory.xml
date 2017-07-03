@@ -15,6 +15,7 @@
                 android:id="@+id/text_view_product_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/text_view_catalog_activity"
                 android:textAppearance="?android:textAppearanceMedium"
                 tools:text="Product name" />
 
@@ -22,6 +23,7 @@
                 android:id="@+id/text_view_product_quantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/text_view_catalog_activity"
                 android:textAppearance="?android:textAppearanceMedium"
                 tools:text="Quantity" />
 
@@ -29,6 +31,7 @@
                 android:id="@+id/text_view_product_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/text_view_catalog_activity"
                 android:textAppearance="?android:textAppearanceMedium"
                 tools:text="Price" />
 

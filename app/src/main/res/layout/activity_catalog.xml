@@ -1,9 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-        android:layout_margin="@dimen/activity_margin"
-        tools:context=".CatalogActivity">
-
+    android:layout_height="match_parent"
+    android:layout_margin="@dimen/activity_margin">
         <!--
         <TextView
             android:id="@+id/text_view_all"

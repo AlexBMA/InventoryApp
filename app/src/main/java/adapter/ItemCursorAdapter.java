@@ -41,9 +41,9 @@ public class ItemCursorAdapter extends CursorAdapter {
         int price = cursor.getInt(cursor.getColumnIndex(InventoryContact.ItemEntry.COLUMN_VALUE));
         int quantity = cursor.getInt(cursor.getColumnIndex(InventoryContact.ItemEntry.COLUMN_STOCK));
 
-        tvName.setText(name);
-        tvPrice.setText(price + "");
-        tvQuantity.setText(quantity + "");
+        tvName.setText(context.getString(R.string.text_view_name) + ": " + name);
+        tvPrice.setText(context.getString(R.string.text_view_price) + ": " + price);
+        tvQuantity.setText(context.getString(R.string.text_view_stock) + ": " + quantity);
 
     }
 }
