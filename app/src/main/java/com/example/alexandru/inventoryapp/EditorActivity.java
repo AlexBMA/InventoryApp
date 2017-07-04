@@ -169,8 +169,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         Item tempItem = new Item();
 
         tempItem.setName(name);
-        tempItem.setStock(AppConstants.INITIAL_STOCK);
-        tempItem.setValue(value);
+        tempItem.setQuantity(AppConstants.INITIAL_STOCK);
+        tempItem.setPrice(value);
         tempItem.setSales(AppConstants.INITIAL_SALES);
 
         if (selectedImageUri != null) {

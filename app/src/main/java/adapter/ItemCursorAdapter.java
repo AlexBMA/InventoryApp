@@ -40,26 +40,31 @@ public class ItemCursorAdapter extends CursorAdapter {
         TextView tvName = (TextView) view.findViewById(R.id.text_view_product_name);
         TextView tvPrice = (TextView) view.findViewById(R.id.text_view_product_price);
         TextView tvQuantity = (TextView) view.findViewById(R.id.text_view_product_quantity);
-        TextView tvSales = (TextView) view.findViewById(R.id.text_view_product_sale);
+
         Button button = (Button) view.findViewById(R.id.button_sale);
 
         String name = cursor.getString(cursor.getColumnIndex(InventoryContact.ItemEntry.COLUMN_NAME));
         int price = cursor.getInt(cursor.getColumnIndex(InventoryContact.ItemEntry.COLUMN_VALUE));
         int quantity = cursor.getInt(cursor.getColumnIndex(InventoryContact.ItemEntry.COLUMN_STOCK));
         int sales = cursor.getInt(cursor.getColumnIndex(InventoryContact.ItemEntry.COLUMN_SALES));
-
+        long id = cursor.getLong(cursor.getColumnIndex(InventoryContact.ItemEntry._ID));
+        byte[] bytes = cursor.getBlob(cursor.getColumnIndex(InventoryContact.ItemEntry.COLUMN_IMG_BYTES));
 
         tvName.setText(context.getString(R.string.text_view_name) + ": " + name);
         tvPrice.setText(context.getString(R.string.text_view_price) + ": " + price);
         tvQuantity.setText(context.getString(R.string.text_view_stock) + ": " + quantity);
-        tvSales.setText(context.getString(R.string.text_view_sales) + ": " + sales);
 
-        //Log.e("TAG Q", quantity + "");
-        //Log.e("TAG M", context.getString(R.string.text_view_stock) + "");
 
         CustomSaleButtonListener saleListener = new CustomSaleButtonListener(quantity, sales, context.getString(R.string.text_view_stock), tvQuantity);
+        saleListener.setName(name);
+        saleListener.setId(id);
+        saleListener.setBytes(bytes);
+        saleListener.setPrice(price);
+        saleListener.setContext(context);
         button.setOnClickListener(saleListener);
 
 
     }
+
+
 }

@@ -40,7 +40,7 @@ public class Item {
         return value;
     }
 
-    public void setValue(int value) {
+    public void setPrice(int value) {
         this.value = value;
     }
 
@@ -48,7 +48,7 @@ public class Item {
         return stock;
     }
 
-    public void setStock(int stock) {
+    public void setQuantity(int stock) {
         this.stock = stock;
     }
 

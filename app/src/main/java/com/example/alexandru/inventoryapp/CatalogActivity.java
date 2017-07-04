@@ -66,8 +66,6 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
                 Uri editUri = Uri.withAppendedPath(InventoryContact.ItemEntry.CONTENT_URI, id + "");
                 intent.setData(editUri);
                 intent.putExtra(AppConstants.ID_ITEM, id);
-
-
                 startActivity(intent);
 
             }
@@ -153,8 +151,8 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         double random = Math.random() * 100 + 1;
 
         temp.setName("Item name " + random);
-        temp.setStock(AppConstants.INITIAL_STOCK);
-        temp.setValue((int) random);
+        temp.setQuantity(AppConstants.INITIAL_STOCK);
+        temp.setPrice((int) random);
         temp.setSales(AppConstants.INITIAL_SALES);
 
         String uriString = "content://com.android.providers.media.documents/document/image%3A16357";

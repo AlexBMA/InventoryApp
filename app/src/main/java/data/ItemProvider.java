@@ -83,7 +83,16 @@ public class ItemProvider extends ContentProvider {
     @Override
     public String getType(@NonNull Uri uri) {
 
-        return null;
+        final int match = sUriMatcher.match(uri);
+
+        switch (match) {
+            case ITEMS:
+                return InventoryContact.ItemEntry.CONTENT_LIST_TYPE;
+            case ITEM_ID:
+                return InventoryContact.ItemEntry.CONTENT_ITEM_TYPE;
+            default:
+                throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
+        }
 
     }
 
