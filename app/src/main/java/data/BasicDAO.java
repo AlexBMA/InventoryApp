@@ -6,13 +6,5 @@ package data;
 
 public interface BasicDAO {
 
-    void getAllItem();
 
-    void insertAllItems();
-
-    void updateItem();
-
-    void deleteAllItems();
-
-    void getItem();
 }

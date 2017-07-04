@@ -1,8 +1,10 @@
 package com.example.alexandru.inventoryapp;
 
+import android.app.AlertDialog;
 import android.app.LoaderManager;
 import android.content.ContentValues;
 import android.content.CursorLoader;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
@@ -132,21 +134,52 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         switch (item.getItemId()) {
             // Respond to a click on the "Insert dummy data" menu option
             case R.id.action_save: {
-                Log.e("TAG", "save press");
+                // Log.e("TAG", "save press");
                 saveOrUpdateItem();
                 finish();
                 return true;
             }
             // Respond to a click on the "Delete all entries" menu option
+           /*
             case R.id.action_delete: {
-                Log.e("TAG", "delete press");
+               // Log.e("TAG", "delete press");
                 deleteItem();
                 return true;
             }
+            */
 
         }
         return super.onOptionsItemSelected(item);
     }
+
+    public void deleteButtonClick(View view) {
+        Log.e("TAG", "delete button pressed");
+
+        // Create an AlertDialog.Builder and set the message, and click listeners
+        // for the positive and negative buttons on the dialog.
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.delete_dialog_msg);
+        builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                deleteItem();
+            }
+        });
+
+        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (dialog != null) {
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+    }
+
 
     private void deleteItem() {
 

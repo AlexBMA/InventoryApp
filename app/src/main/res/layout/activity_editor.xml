@@ -77,6 +77,7 @@
                     android:id="@+id/text_view_item_stock"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_view_margin"
                     android:layout_weight="1"
                     android:textAppearance="?android:textAppearanceMedium" />
 
@@ -100,6 +101,7 @@
                     android:id="@+id/text_view_item_sales"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/text_view_margin"
                     android:layout_weight="1"
                     android:textAppearance="?android:textAppearanceMedium" />
 
@@ -111,11 +113,18 @@
                 android:orientation="horizontal">
 
                 <Button
-                    android:layout_width="0dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:onClick="orderButtonClick"
                     android:text="@string/button_order_more" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="deleteButtonClick"
+                    android:text="@string/action_delete" />
 
             </LinearLayout>
 

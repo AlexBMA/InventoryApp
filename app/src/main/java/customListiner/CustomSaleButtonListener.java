@@ -3,9 +3,7 @@ package customListiner;
 import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
-import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import data.InventoryContact;
 import model.Item;
@@ -19,50 +17,33 @@ import model.Item;
 
 public class CustomSaleButtonListener implements View.OnClickListener {
 
-
-    Context context;
-    private String msg;
-    private TextView textView;
-    private long id;
-    private int price;
-    private String name;
-    private byte[] bytes;
-    private int sales;
-    private int stock;
+    private Item tempItem;
+    private Context context;
 
 
-    public CustomSaleButtonListener(int stock, int sales, String msg, TextView textView) {
-        this.stock = stock;
-        this.sales = sales;
-        this.msg = msg;
-        this.textView = textView;
+    public CustomSaleButtonListener(Item tempItem, Context context) {
 
+        this.tempItem = tempItem;
+        this.context = context;
     }
 
     @Override
     public void onClick(View v) {
 
-        Log.e("TAG Stock", stock + " ");
-        Log.e("TAG Msg", msg);
-
+        int stock = tempItem.getStock();
+        int sales = tempItem.getSales();
         if (stock > 0) {
             stock = stock - 1;
+            tempItem.setQuantity(stock);
             sales = sales + 1;
+            tempItem.setSales(sales);
+            updateDatabase();
         }
-        textView.setText(msg + " " + stock);
-        updateDatabase();
-
     }
 
     private void updateDatabase() {
-        Item tempItem = new Item();
-        tempItem.setId(id);
-        tempItem.setImgBytes(bytes);
-        tempItem.setSales(sales);
-        tempItem.setPrice(price);
-        tempItem.setQuantity(stock);
-        tempItem.setName(name);
 
+        long id = tempItem.getId();
         Uri editUri = Uri.withAppendedPath(InventoryContact.ItemEntry.CONTENT_URI, id + "");
         String selection = InventoryContact.ItemEntry._ID + " = ?";
         String[] selectionArgs = {id + ""};
@@ -79,27 +60,6 @@ public class CustomSaleButtonListener implements View.OnClickListener {
         values.put(InventoryContact.ItemEntry.COLUMN_VALUE, item.getValue());
         values.put(InventoryContact.ItemEntry.COLUMN_STOCK, item.getStock());
         values.put(InventoryContact.ItemEntry.COLUMN_IMG_BYTES, item.getImgBytes());
-    }
-
-
-    public void setContext(Context context) {
-        this.context = context;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setBytes(byte[] bytes) {
-        this.bytes = bytes;
     }
 
 

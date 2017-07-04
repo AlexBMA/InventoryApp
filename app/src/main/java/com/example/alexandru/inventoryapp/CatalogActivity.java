@@ -6,10 +6,8 @@ import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -170,29 +168,10 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         }
 
 
-
         ContentValues valuesForInsert = new ContentValues();
         setDataForInsert(temp, valuesForInsert);
 
         getContentResolver().insert(InventoryContact.ItemEntry.CONTENT_URI, valuesForInsert);
-
-    }
-
-    @NonNull
-    private String[] getStringsProjection() {
-        return new String[]{
-                InventoryContact.ItemEntry._ID,
-                InventoryContact.ItemEntry.COLUMN_NAME,
-                InventoryContact.ItemEntry.COLUMN_SALES,
-                InventoryContact.ItemEntry.COLUMN_VALUE,
-                InventoryContact.ItemEntry.COLUMN_STOCK
-        };
-
-    }
-
-    private void getAllItemFromInventory(SQLiteDatabase database, String[] projection) {
-        Cursor c = database.query(InventoryContact.ItemEntry.TABLE_NAME, projection, null, null, null, null, null);
-
 
     }
 

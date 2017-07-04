@@ -13,6 +13,7 @@ import com.example.alexandru.inventoryapp.R;
 
 import customListiner.CustomSaleButtonListener;
 import data.InventoryContact;
+import model.Item;
 
 
 /**
@@ -54,13 +55,15 @@ public class ItemCursorAdapter extends CursorAdapter {
         tvPrice.setText(context.getString(R.string.text_view_price) + ": " + price);
         tvQuantity.setText(context.getString(R.string.text_view_stock) + ": " + quantity);
 
+        Item tempItem = new Item();
+        tempItem.setId(id);
+        tempItem.setPrice(price);
+        tempItem.setImgBytes(bytes);
+        tempItem.setQuantity(quantity);
+        tempItem.setSales(sales);
+        tempItem.setName(name);
 
-        CustomSaleButtonListener saleListener = new CustomSaleButtonListener(quantity, sales, context.getString(R.string.text_view_stock), tvQuantity);
-        saleListener.setName(name);
-        saleListener.setId(id);
-        saleListener.setBytes(bytes);
-        saleListener.setPrice(price);
-        saleListener.setContext(context);
+        CustomSaleButtonListener saleListener = new CustomSaleButtonListener(tempItem, context);
         button.setOnClickListener(saleListener);
 
 
