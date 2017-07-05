@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-public class SupplierActivity extends AppCompatActivity {
+public class CatalogSupplierActivity extends AppCompatActivity {
 
 
     private Uri selectedItemUri;
@@ -34,7 +34,7 @@ public class SupplierActivity extends AppCompatActivity {
 
        /* case android.R.id.home:
         {
-            NavUtils.navigateUpFromSameTask(EditorActivity.this);
+            NavUtils.navigateUpFromSameTask(EditorItemActivity.this);
             return  true;
         }
         */

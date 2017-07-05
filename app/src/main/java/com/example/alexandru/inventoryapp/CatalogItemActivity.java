@@ -1,7 +1,6 @@
 package com.example.alexandru.inventoryapp;
 
 import android.app.LoaderManager;
-import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
@@ -17,20 +16,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-
 import adapter.ItemCursorAdapter;
 import constactpack.AppConstants;
 import data.InventoryContact;
 import data.ItemDAO;
 import data.ItemDAOImpl;
-import helperpack.Utils;
 import model.Item;
 
 
-public class CatalogActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class CatalogItemActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int SELECT_PICTURE = 100;
     private final int LOADER_INDEX = 1;
@@ -61,7 +55,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
+                Intent intent = new Intent(CatalogItemActivity.this, EditorItemActivity.class);
                 Log.e("TAG", "in the onItemClickListener " + id);
                 Uri editUri = Uri.withAppendedPath(InventoryContact.ItemEntry.CONTENT_URI, id + "");
                 intent.setData(editUri);
@@ -95,7 +89,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
                 if (selectedImageUri != null) {
 
                     Log.e("IMG", selectedImageUri.toString());
-                    Intent intent = new Intent(CatalogActivity.this, EditorActivity.class);
+                    Intent intent = new Intent(CatalogItemActivity.this, EditorItemActivity.class);
                     //intent.put
                     intent.putExtra(AppConstants.IMG_URI_STRING, selectedImageUri.toString());
                     //intent.setData(selectedImageUri);
@@ -143,49 +137,6 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
         ItemDAO<Item> inventoryDAO = new ItemDAOImpl();
         inventoryDAO.deleteAllItems(getContentResolver(), InventoryContact.ItemEntry.CONTENT_URI);
-    }
-
-
-    private void insetItem() {
-
-        Log.e("TAG", "in insert method");
-        Item temp = new Item();
-
-        double random = Math.random() * 100 + 1;
-
-        temp.setName("Item name " + random);
-        temp.setQuantity(AppConstants.INITIAL_STOCK);
-        temp.setPrice((int) random);
-        temp.setSales(AppConstants.INITIAL_SALES);
-
-        String uriString = "content://com.android.providers.media.documents/document/image%3A16357";
-
-        Uri imgUriDefault = Uri.parse(uriString);
-        try {
-            InputStream iStream = getContentResolver().openInputStream(imgUriDefault);
-            byte[] imgBytes = Utils.getBytes(iStream);
-            temp.setImgBytes(imgBytes);
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        ContentValues valuesForInsert = new ContentValues();
-        setDataForInsert(temp, valuesForInsert);
-
-        getContentResolver().insert(InventoryContact.ItemEntry.CONTENT_URI, valuesForInsert);
-
-    }
-
-
-    private void setDataForInsert(Item item, ContentValues values) {
-        values.put(InventoryContact.ItemEntry.COLUMN_NAME, item.getName());
-        values.put(InventoryContact.ItemEntry.COLUMN_SALES, item.getSales());
-        values.put(InventoryContact.ItemEntry.COLUMN_VALUE, item.getValue());
-        values.put(InventoryContact.ItemEntry.COLUMN_STOCK, item.getStock());
     }
 
 

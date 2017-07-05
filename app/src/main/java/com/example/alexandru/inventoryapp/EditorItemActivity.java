@@ -31,7 +31,7 @@ import data.ItemDAOImpl;
 import helperpack.Utils;
 import model.Item;
 
-public class EditorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class EditorItemActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int LOADER_INDEX = 1;
 
@@ -58,7 +58,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         setContentView(R.layout.activity_item_editor);
 
 
-        Log.e("ZZ", "ZZ");
 
         itemName = (EditText) findViewById(R.id.edit_item_name);
         itemPrice = (EditText) findViewById(R.id.edit_item_price);
@@ -73,7 +72,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         Intent intent = getIntent();
         selectedItemUri = intent.getData();
 
-        Log.e("TAG", selectedItemUri + " ^^");
 
         String uriImgString = intent.getStringExtra(AppConstants.IMG_URI_STRING);
         if (uriImgString != null) {
@@ -280,7 +278,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     public void orderButtonClick(View view) {
         Log.e("TAG", "order button pressed");
 
-        Intent intent = new Intent(this, SupplierActivity.class);
+        Intent intent = new Intent(this, CatalogSupplierActivity.class);
         intent.setData(selectedItemUri);
         intent.putExtra(AppConstants.ID_ITEM, id);
         startActivityForResult(intent, 1);
