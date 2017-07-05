@@ -134,6 +134,7 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
                 return true;
             }
 
+
         }
         return super.onOptionsItemSelected(item);
     }

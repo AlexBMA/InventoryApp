@@ -15,7 +15,7 @@ public interface BasicDAO<E> {
 
     void deleteItem(ContentResolver contentResolver, Uri uri, long id);
 
-    void insertItem(ContentResolver contentResolver, Uri uri, E item);
+    Uri insertItem(ContentResolver contentResolver, Uri uri, E item);
 
     void updateItem(ContentResolver contentResolver, Uri uri, long id, E item);
 

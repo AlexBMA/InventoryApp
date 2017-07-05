@@ -58,6 +58,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         setContentView(R.layout.activity_item_editor);
 
 
+        Log.e("ZZ", "ZZ");
+
         itemName = (EditText) findViewById(R.id.edit_item_name);
         itemPrice = (EditText) findViewById(R.id.edit_item_price);
 
@@ -70,6 +72,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         Intent intent = getIntent();
         selectedItemUri = intent.getData();
+
+        Log.e("TAG", selectedItemUri + " ^^");
 
         String uriImgString = intent.getStringExtra(AppConstants.IMG_URI_STRING);
         if (uriImgString != null) {
@@ -213,12 +217,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
             ItemDAO<Item> inventoryDAO = new ItemDAOImpl();
             inventoryDAO.updateItem(getContentResolver(), selectedItemUri, id, tempItem);
-
-
         } else {
 
             ItemDAO<Item> inventoryDAO = new ItemDAOImpl();
-            inventoryDAO.insertItem(getContentResolver(), InventoryContact.ItemEntry.CONTENT_URI, tempItem);
+            Uri newUriItem = inventoryDAO.insertItem(getContentResolver(), InventoryContact.ItemEntry.CONTENT_URI, tempItem);
+
         }
 
 
@@ -280,7 +283,20 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         Intent intent = new Intent(this, SupplierActivity.class);
         intent.setData(selectedItemUri);
         intent.putExtra(AppConstants.ID_ITEM, id);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
+
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            Log.e("TAG ", "HERE in <><><>");
+            if (resultCode == RESULT_OK) {
+                selectedItemUri = data.getData();
+
+                Log.e("TAG ", selectedItemUri.toString() + "");
+            }
+        }
     }
 
 

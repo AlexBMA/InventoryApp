@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 public class SupplierActivity extends AppCompatActivity {
@@ -28,17 +29,26 @@ public class SupplierActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-
             }
         });
+
+       /* case android.R.id.home:
+        {
+            NavUtils.navigateUpFromSameTask(EditorActivity.this);
+            return  true;
+        }
+        */
     }
 
     @Override
     public void onBackPressed() {
+        Log.e("TAG ", "HERE in BACK");
         Intent intent = new Intent();
-        //intent.setData()
+        intent.setData(selectedItemUri);
+        setResult(RESULT_OK, intent);
         super.onBackPressed();
         return;
-
     }
+
+
 }

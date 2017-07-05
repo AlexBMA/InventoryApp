@@ -33,13 +33,7 @@
             android:enabled="true"
             android:exported="false" />
 
-        <activity
-            android:name=".SupplierActivity"
-            android:parentActivityName=".EditorActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".EditorActivity" />
-
+        <activity android:name=".SupplierActivity">
         </activity>
     </application>
 

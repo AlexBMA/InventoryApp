@@ -30,12 +30,13 @@ public class ItemDAOImpl implements ItemDAO<Item> {
     }
 
     @Override
-    public void insertItem(ContentResolver contentResolver, Uri uri, Item item) {
+    public Uri insertItem(ContentResolver contentResolver, Uri uri, Item item) {
 
         ContentValues values = new ContentValues();
         transformItemInValues(item, values);
-        contentResolver.insert(uri, values);
+        Uri newItemUri = contentResolver.insert(uri, values);
 
+        return newItemUri;
     }
 
     @Override
