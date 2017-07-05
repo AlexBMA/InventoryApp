@@ -1,13 +1,13 @@
 package customListiner;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.net.Uri;
 import android.view.View;
 
 import data.InventoryContact;
+import data.ItemDAO;
+import data.ItemDAOImpl;
 import model.Item;
-
 
 
 
@@ -45,22 +45,8 @@ public class CustomSaleButtonListener implements View.OnClickListener {
 
         long id = tempItem.getId();
         Uri editUri = Uri.withAppendedPath(InventoryContact.ItemEntry.CONTENT_URI, id + "");
-        String selection = InventoryContact.ItemEntry._ID + " = ?";
-        String[] selectionArgs = {id + ""};
-
-        ContentValues values = new ContentValues();
-        setDataForInsert(tempItem, values);
-
-        context.getContentResolver().update(editUri, values, selection, selectionArgs);
+        ItemDAO<Item> inventoryDAO = new ItemDAOImpl();
+        inventoryDAO.updateItem(context.getContentResolver(), editUri, id, tempItem);
     }
-
-    private void setDataForInsert(Item item, ContentValues values) {
-        values.put(InventoryContact.ItemEntry.COLUMN_NAME, item.getName());
-        values.put(InventoryContact.ItemEntry.COLUMN_SALES, item.getSales());
-        values.put(InventoryContact.ItemEntry.COLUMN_VALUE, item.getValue());
-        values.put(InventoryContact.ItemEntry.COLUMN_STOCK, item.getStock());
-        values.put(InventoryContact.ItemEntry.COLUMN_IMG_BYTES, item.getImgBytes());
-    }
-
 
 }

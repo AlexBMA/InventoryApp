@@ -26,6 +26,8 @@ import java.io.InputStream;
 
 import constactpack.AppConstants;
 import data.InventoryContact;
+import data.ItemDAO;
+import data.ItemDAOImpl;
 import helperpack.Utils;
 import model.Item;
 
@@ -127,8 +129,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        //Log.e("TAG", "%% ##");
-
 
         // User clicked on a menu option in the app bar overflow menu
         switch (item.getItemId()) {
@@ -185,10 +185,10 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
 
         if (id > -1) {
-            String selection = InventoryContact.ItemEntry._ID + " = ?";
-            String[] selectionArgs = {id + ""};
 
-            getContentResolver().delete(selectedItemUri, selection, selectionArgs);
+            ItemDAO<Item> inventoryDAO = new ItemDAOImpl();
+            inventoryDAO.deleteItem(getContentResolver(), selectedItemUri, id);
+
         }
         finish();
     }
@@ -219,30 +219,22 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         ContentValues values = new ContentValues();
 
         if (id > -1) {
-            tempItem.setId(id);
-            setDataForInsert(tempItem, values);
-            String selection = InventoryContact.ItemEntry._ID + " = ?";
-            String[] selectionArgs = {id + ""};
             Log.e("ID", id + " &*^");
-            int rez = getContentResolver().update(selectedItemUri, values, selection, selectionArgs);
-            Log.e("Rez:", rez + "");
+            tempItem.setId(id);
+
+            ItemDAO<Item> inventoryDAO = new ItemDAOImpl();
+            inventoryDAO.updateItem(getContentResolver(), selectedItemUri, id, tempItem);
+
 
         } else {
-            setDataForInsert(tempItem, values);
-            getContentResolver().insert(InventoryContact.ItemEntry.CONTENT_URI, values);
+
+            ItemDAO<Item> inventoryDAO = new ItemDAOImpl();
+            inventoryDAO.insertItem(getContentResolver(), InventoryContact.ItemEntry.CONTENT_URI, tempItem);
         }
 
 
     }
 
-
-    private void setDataForInsert(Item item, ContentValues values) {
-        values.put(InventoryContact.ItemEntry.COLUMN_NAME, item.getName());
-        values.put(InventoryContact.ItemEntry.COLUMN_SALES, item.getSales());
-        values.put(InventoryContact.ItemEntry.COLUMN_VALUE, item.getValue());
-        values.put(InventoryContact.ItemEntry.COLUMN_STOCK, item.getStock());
-        values.put(InventoryContact.ItemEntry.COLUMN_IMG_BYTES, item.getImgBytes());
-    }
 
 
     @Override

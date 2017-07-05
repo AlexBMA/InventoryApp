@@ -24,6 +24,8 @@ import java.io.InputStream;
 import adapter.ItemCursorAdapter;
 import constactpack.AppConstants;
 import data.InventoryContact;
+import data.ItemDAO;
+import data.ItemDAOImpl;
 import helperpack.Utils;
 import model.Item;
 
@@ -137,7 +139,8 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
 
     private void deleteAllPets() {
 
-        getContentResolver().delete(InventoryContact.ItemEntry.CONTENT_URI, null, null);
+        ItemDAO<Item> inventoryDAO = new ItemDAOImpl();
+        inventoryDAO.deleteAllItems(getContentResolver(), InventoryContact.ItemEntry.CONTENT_URI);
     }
 
 

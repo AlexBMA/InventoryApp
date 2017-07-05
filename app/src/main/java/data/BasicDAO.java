@@ -1,10 +1,22 @@
 package data;
 
+import android.content.ContentResolver;
+import android.net.Uri;
+
+
 /**
  * Created by Alexandru on 6/18/2017.
  */
 
-public interface BasicDAO {
+public interface BasicDAO<E> {
 
+
+    void deleteAllItems(ContentResolver contentResolver, Uri uri);
+
+    void deleteItem(ContentResolver contentResolver, Uri uri, long id);
+
+    void insertItem(ContentResolver contentResolver, Uri uri, E item);
+
+    void updateItem(ContentResolver contentResolver, Uri uri, long id, E item);
 
 }
