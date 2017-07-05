@@ -2,10 +2,7 @@
     <string name="app_name">InventoryApp</string>
 
 
-    <!-- Label for overflow menu option that inserts fake pet data into the app [CHAR LIMIT=20] -->
     <string name="action_insert_dummy_data">Insert Dummy Data</string>
-
-    <!-- Label for overflow menu option that deletes all pet data in the app [CHAR LIMIT=20] -->
     <string name="action_delete_all_entries">Delete All Pets</string>
 
     <string name="action_save">Save</string>
@@ -15,7 +12,11 @@
     <string name="delete">Delete</string>
     <string name="cancel">Cancel</string>
 
+    <string name="item_catalog_title">Item Catalog</string>
+    <string name="supplier_catalog_tile">Supplier Catalog</string>
+
     <string name="button_order_more">Order more </string>
+
 
     <string name="text_view_price">Price</string>
     <string name="text_view_sales">Sale</string>

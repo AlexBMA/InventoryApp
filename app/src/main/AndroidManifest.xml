@@ -2,10 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.alexandru.inventoryapp">
 
-    <!--
-    <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" />
-    -->
-
+    <!--     <uses-permission android:name="android.permission.MANAGE_DOCUMENTS" /> -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -23,11 +20,11 @@
         <activity
             android:name=".EditorActivity"
             android:parentActivityName=".CatalogActivity">
+
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".CatalogActivity" />
-
         </activity>
 
         <provider
@@ -35,6 +32,15 @@
             android:authorities="com.example.alexandru.data.ItemProvider"
             android:enabled="true"
             android:exported="false" />
+
+        <activity
+            android:name=".SupplierActivity"
+            android:parentActivityName=".EditorActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".EditorActivity" />
+
+        </activity>
     </application>
 
 </manifest>

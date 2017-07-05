@@ -39,8 +39,8 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_catalog);
-
+        setContentView(R.layout.activity_item_catalog);
+        setTitle(R.string.item_catalog_title);
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button_add);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +84,6 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         //startActivity(intent);
         startActivityForResult(Intent.createChooser(intent, "Select Picture"), SELECT_PICTURE);
 
-
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -123,10 +122,12 @@ public class CatalogActivity extends AppCompatActivity implements LoaderManager.
         // User clicked on a menu option in the app bar overflow menu
         switch (item.getItemId()) {
             // Respond to a click on the "Insert dummy data" menu option
+            /*
             case R.id.action_insert_dummy_data: {
                 //  insetItem();
                 return true;
             }
+            */
             // Respond to a click on the "Delete all entries" menu option
             case R.id.action_delete_all_entries: {
                 deleteAllPets();

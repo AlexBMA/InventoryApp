@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -36,9 +37,13 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     protected EditText itemName;
     protected EditText itemPrice;
+
     protected TextView itemSales;
     protected TextView itemStock;
     protected ImageView imageView;
+
+    protected Button orderButton;
+    protected Button deleteButton;
 
     private long id = -1;
     private Bitmap image;
@@ -50,14 +55,18 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editor);
+        setContentView(R.layout.activity_item_editor);
 
 
         itemName = (EditText) findViewById(R.id.edit_item_name);
         itemPrice = (EditText) findViewById(R.id.edit_item_price);
+
         itemStock = (TextView) findViewById(R.id.text_view_item_stock);
         itemSales = (TextView) findViewById(R.id.text_view_item_sales);
         imageView = (ImageView) findViewById(R.id.image_view_item);
+
+        orderButton = (Button) findViewById(R.id.button_order);
+        deleteButton = (Button) findViewById(R.id.button_delete);
 
         Intent intent = getIntent();
         selectedItemUri = intent.getData();
@@ -71,8 +80,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
             itemStock.setText(String.valueOf(AppConstants.INITIAL_STOCK));
             itemSales.setText(String.valueOf(AppConstants.INITIAL_SALES));
 
-            int itemSales = intent.getIntExtra(AppConstants.ITEM_SALE, -1);
-            Log.e("TAG", " " + itemSales);
+            orderButton.setVisibility(Button.GONE);
+            deleteButton.setVisibility(Button.GONE);
         }
 
         if (selectedItemUri != null) {
@@ -166,12 +175,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
     private void deleteItem() {
 
-
         if (id > -1) {
-
             ItemDAO<Item> inventoryDAO = new ItemDAOImpl();
             inventoryDAO.deleteItem(getContentResolver(), selectedItemUri, id);
-
         }
         finish();
     }
@@ -250,7 +256,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
             image = Utils.getImage(imgBytes);
 
-            // Log.e("pirce",price+" $$");
 
             imageView.setImageBitmap(image);
             itemName.setText(nameItem);
@@ -263,7 +268,6 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
-        // imageView.
         itemName.clearComposingText();
         itemPrice.clearComposingText();
         itemStock.clearComposingText();
@@ -273,6 +277,11 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     public void orderButtonClick(View view) {
         Log.e("TAG", "order button pressed");
 
-        // Intent intent = new Intent(this,)
+        Intent intent = new Intent(this, SupplierActivity.class);
+        intent.setData(selectedItemUri);
+        intent.putExtra(AppConstants.ID_ITEM, id);
+        startActivity(intent);
     }
+
+
 }
