@@ -2,7 +2,6 @@ package com.example.alexandru.inventoryapp;
 
 import android.app.AlertDialog;
 import android.app.LoaderManager;
-import android.content.ContentValues;
 import android.content.CursorLoader;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -32,12 +31,6 @@ import helperpack.Utils;
 import model.Item;
 
 public class EditorActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
-
-
-    // These are the Contacts rows that we will retrieve
-    private static final String[] PROJECTION = null;
-    // This is the select criteria
-    private static final String SELECTION = null;
 
     private static final int LOADER_INDEX = 1;
 
@@ -71,7 +64,8 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         String uriImgString = intent.getStringExtra(AppConstants.IMG_URI_STRING);
         if (uriImgString != null) {
-            Log.e("IMG_Editor_Activity", uriImgString);
+
+            setTitle(R.string.add_mode);
             selectedImageUri = Uri.parse(uriImgString);
             imageView.setImageURI(selectedImageUri);
             itemStock.setText(String.valueOf(AppConstants.INITIAL_STOCK));
@@ -83,20 +77,9 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
 
         if (selectedItemUri != null) {
             id = intent.getLongExtra(AppConstants.ID_ITEM, -1);
-            Log.e("ID", id + "");
-
-            //prepare for edit item
-        }
-
-       /* if (selectedItemUri != null) {
-            Log.e("IMG_Editor_Activity", selectedImageUri.toString());
-            // getImgFromUri(selectedImageUri);
-
-            imageView.setImageURI(selectedImageUri);
-            // imageView.setImageBitmap(Utils.getImage(imgBytes));
+            setTitle(R.string.edit_mode);
 
         }
-        */
 
         getLoaderManager().initLoader(LOADER_INDEX, null, this);
 
@@ -209,17 +192,17 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
         if (selectedImageUri != null) {
             byte[] imgBytes = getImgFromUri(selectedImageUri);
             tempItem.setImgBytes(imgBytes);
-            Log.e("BYTES: from uri", imgBytes.length + "");
+            // Log.e("BYTES: from uri", imgBytes.length + "");
         } else {
             byte[] imgBytes = Utils.getImageBytes(image);
             tempItem.setImgBytes(imgBytes);
-            Log.e("BYTES from img:", imgBytes.length + "");
+            // Log.e("BYTES from img:", imgBytes.length + "");
         }
 
-        ContentValues values = new ContentValues();
+
 
         if (id > -1) {
-            Log.e("ID", id + " &*^");
+            // Log.e("ID", id + " &*^");
             tempItem.setId(id);
 
             ItemDAO<Item> inventoryDAO = new ItemDAOImpl();
@@ -241,7 +224,7 @@ public class EditorActivity extends AppCompatActivity implements LoaderManager.L
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
         if (selectedItemUri != null)
-            return new CursorLoader(this, selectedItemUri, PROJECTION, SELECTION, null, null);
+            return new CursorLoader(this, selectedItemUri, null, null, null, null);
 
         return null;
 

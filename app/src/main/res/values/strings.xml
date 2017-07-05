@@ -22,4 +22,6 @@
     <string name="text_view_name">Name</string>
     <string name="text_view_stock">Quantity</string>
 
+    <string name="edit_mode">Edit item</string>
+    <string name="add_mode">Add item</string>
 </resources>
