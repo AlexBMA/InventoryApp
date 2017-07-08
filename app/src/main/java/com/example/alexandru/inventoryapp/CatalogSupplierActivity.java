@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 
 public class CatalogSupplierActivity extends AppCompatActivity {
@@ -29,6 +28,8 @@ public class CatalogSupplierActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                Intent intent = new Intent(CatalogSupplierActivity.this, EditorSupplierActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -42,7 +43,7 @@ public class CatalogSupplierActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Log.e("TAG ", "HERE in BACK");
+        // Log.e("TAG ", "HERE in BACK");
         Intent intent = new Intent();
         intent.setData(selectedItemUri);
         setResult(RESULT_OK, intent);
