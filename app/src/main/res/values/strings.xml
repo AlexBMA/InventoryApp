@@ -16,12 +16,15 @@
     <string name="supplier_catalog_tile">Supplier Catalog</string>
 
     <string name="button_order_more">Order more </string>
-
+    <string name="button_add_supplier">Add supplier</string>
 
     <string name="text_view_price">Price</string>
     <string name="text_view_sales">Sale</string>
     <string name="text_view_name">Name</string>
     <string name="text_view_stock">Quantity</string>
+
+    <string name="text_view_name_supplier">Supplier name</string>
+    <string name="text_view_email_supplier">Supplier email</string>
 
     <string name="edit_mode">Edit item</string>
     <string name="add_mode">Add item</string>
