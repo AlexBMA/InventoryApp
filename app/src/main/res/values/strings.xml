@@ -23,6 +23,7 @@
     <string name="text_view_name">Name</string>
     <string name="text_view_stock">Quantity</string>
 
+
     <string name="text_view_name_supplier">Supplier name</string>
     <string name="text_view_email_supplier">Supplier email</string>
 

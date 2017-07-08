@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/text_view_product_name"
+        android:id="@+id/text_view_supplier_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/text_view_catalog_activity"
@@ -14,7 +14,7 @@
         tools:text="Supplier name" />
 
     <TextView
-        android:id="@+id/text_view_product_quantity"
+        android:id="@+id/text_view_supplier_email"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/text_view_catalog_activity"

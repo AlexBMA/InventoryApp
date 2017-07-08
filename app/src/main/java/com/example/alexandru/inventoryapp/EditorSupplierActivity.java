@@ -17,5 +17,7 @@ public class EditorSupplierActivity extends AppCompatActivity {
 
         nameSupplier = (EditText) findViewById(R.id.edit_text_name_supplier);
         emailSupplier = (EditText) findViewById(R.id.edit_text_email_supplier);
+
+
     }
 }

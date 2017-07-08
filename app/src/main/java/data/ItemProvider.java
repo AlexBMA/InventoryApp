@@ -20,12 +20,12 @@ public class ItemProvider extends ContentProvider {
     public static final String LOG_TAG = ItemProvider.class.getSimpleName();
     private static final UriMatcher sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
     /**
-     * URI matcher code for the content URI for the pets table
+     * URI matcher code for the content URI for the items table
      */
     private static final int ITEMS = 100;
 
     /**
-     * URI matcher code for the content URI for a single pet in the pets table
+     * URI matcher code for the content URI for a single item in the pets table
      */
     private static final int ITEM_ID = 101;
 
@@ -36,8 +36,8 @@ public class ItemProvider extends ContentProvider {
         // should recognize. All paths added to the UriMatcher have a corresponding code to return
         // when a match is found.
 
-        sUriMatcher.addURI(InventoryContact.CONTENT_AUTHORITY, InventoryContact.PATH_ITEMS, ITEMS);
-        sUriMatcher.addURI(InventoryContact.CONTENT_AUTHORITY, InventoryContact.PATH_ITEMS + "/#", ITEM_ID);
+        sUriMatcher.addURI(InventoryContact.ItemEntry.CONTENT_AUTHORITY, InventoryContact.ItemEntry.PATH_ITEMS, ITEMS);
+        sUriMatcher.addURI(InventoryContact.ItemEntry.CONTENT_AUTHORITY, InventoryContact.ItemEntry.PATH_ITEMS + "/#", ITEM_ID);
     }
 
     private InventoryDbHelper mDbHelper;

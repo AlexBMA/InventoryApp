@@ -32,6 +32,12 @@
             android:authorities="com.example.alexandru.data.ItemProvider"
             android:enabled="true"
             android:exported="false" />
+        <provider
+            android:name="data.SupplierProvider"
+            android:authorities="com.example.alexandru.data.SupplierProvider"
+            android:enabled="true"
+            android:exported="false" />
+
 
         <activity android:name=".CatalogSupplierActivity"></activity>
         <activity android:name=".EditorSupplierActivity"></activity>
