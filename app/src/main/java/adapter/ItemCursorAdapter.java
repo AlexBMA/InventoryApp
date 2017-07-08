@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.example.alexandru.inventoryapp.R;
 
 import customListiner.CustomSaleButtonListener;
-import data.InventoryContact;
+import data.InventoryAppTable;
 import model.Item;
 
 
@@ -44,12 +44,12 @@ public class ItemCursorAdapter extends CursorAdapter {
 
         Button button = (Button) view.findViewById(R.id.button_sale);
 
-        String name = cursor.getString(cursor.getColumnIndex(InventoryContact.ItemEntry.COLUMN_NAME));
-        int price = cursor.getInt(cursor.getColumnIndex(InventoryContact.ItemEntry.COLUMN_VALUE));
-        int quantity = cursor.getInt(cursor.getColumnIndex(InventoryContact.ItemEntry.COLUMN_STOCK));
-        int sales = cursor.getInt(cursor.getColumnIndex(InventoryContact.ItemEntry.COLUMN_SALES));
-        long id = cursor.getLong(cursor.getColumnIndex(InventoryContact.ItemEntry._ID));
-        byte[] bytes = cursor.getBlob(cursor.getColumnIndex(InventoryContact.ItemEntry.COLUMN_IMG_BYTES));
+        String name = cursor.getString(cursor.getColumnIndex(InventoryAppTable.ItemEntry.COLUMN_NAME));
+        int price = cursor.getInt(cursor.getColumnIndex(InventoryAppTable.ItemEntry.COLUMN_VALUE));
+        int quantity = cursor.getInt(cursor.getColumnIndex(InventoryAppTable.ItemEntry.COLUMN_STOCK));
+        int sales = cursor.getInt(cursor.getColumnIndex(InventoryAppTable.ItemEntry.COLUMN_SALES));
+        long id = cursor.getLong(cursor.getColumnIndex(InventoryAppTable.ItemEntry._ID));
+        byte[] bytes = cursor.getBlob(cursor.getColumnIndex(InventoryAppTable.ItemEntry.COLUMN_IMG_BYTES));
 
         tvName.setText(context.getString(R.string.text_view_name) + ": " + name);
         tvPrice.setText(context.getString(R.string.text_view_price) + ": " + price);

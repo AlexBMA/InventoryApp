@@ -4,13 +4,13 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
-import static data.InventoryContact.SupplierEntry.BASE_CONTENT_URI;
+import static data.InventoryAppTable.SupplierEntry.BASE_CONTENT_URI;
 
 /**
  * Created by Alexandru on 6/8/2017.
  */
 
-public final class InventoryContact {
+public final class InventoryAppTable {
 
 
     //public static final String PATH_ITEMS = "inventory";

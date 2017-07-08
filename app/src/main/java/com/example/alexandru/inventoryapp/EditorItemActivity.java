@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import constactpack.AppConstants;
-import data.InventoryContact;
+import data.InventoryAppTable;
 import data.ItemDAO;
 import data.ItemDAOImpl;
 import helperpack.Utils;
@@ -218,7 +218,7 @@ public class EditorItemActivity extends AppCompatActivity implements LoaderManag
         } else {
 
             ItemDAO<Item> inventoryDAO = new ItemDAOImpl();
-            Uri newUriItem = inventoryDAO.insertItem(getContentResolver(), InventoryContact.ItemEntry.CONTENT_URI, tempItem);
+            Uri newUriItem = inventoryDAO.insertItem(getContentResolver(), InventoryAppTable.ItemEntry.CONTENT_URI, tempItem);
 
         }
 
@@ -242,11 +242,11 @@ public class EditorItemActivity extends AppCompatActivity implements LoaderManag
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
 
         if (data.moveToFirst()) {
-            int nameColumnIndex = data.getColumnIndex(InventoryContact.ItemEntry.COLUMN_NAME);
-            int quantityColumnIndex = data.getColumnIndex(InventoryContact.ItemEntry.COLUMN_STOCK);
-            int priceColumnIndex = data.getColumnIndex(InventoryContact.ItemEntry.COLUMN_VALUE);
-            int imgBytesColumnIndex = data.getColumnIndex(InventoryContact.ItemEntry.COLUMN_IMG_BYTES);
-            int saleColumnIndex = data.getColumnIndex(InventoryContact.ItemEntry.COLUMN_SALES);
+            int nameColumnIndex = data.getColumnIndex(InventoryAppTable.ItemEntry.COLUMN_NAME);
+            int quantityColumnIndex = data.getColumnIndex(InventoryAppTable.ItemEntry.COLUMN_STOCK);
+            int priceColumnIndex = data.getColumnIndex(InventoryAppTable.ItemEntry.COLUMN_VALUE);
+            int imgBytesColumnIndex = data.getColumnIndex(InventoryAppTable.ItemEntry.COLUMN_IMG_BYTES);
+            int saleColumnIndex = data.getColumnIndex(InventoryAppTable.ItemEntry.COLUMN_SALES);
 
 
             String nameItem = data.getString(nameColumnIndex);

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.view.View;
 
-import data.InventoryContact;
+import data.InventoryAppTable;
 import data.ItemDAO;
 import data.ItemDAOImpl;
 import model.Item;
@@ -44,7 +44,7 @@ public class CustomSaleButtonListener implements View.OnClickListener {
     private void updateDatabase() {
 
         long id = tempItem.getId();
-        Uri editUri = Uri.withAppendedPath(InventoryContact.ItemEntry.CONTENT_URI, id + "");
+        Uri editUri = Uri.withAppendedPath(InventoryAppTable.ItemEntry.CONTENT_URI, id + "");
         ItemDAO<Item> inventoryDAO = new ItemDAOImpl();
         inventoryDAO.updateItem(context.getContentResolver(), editUri, id, tempItem);
     }

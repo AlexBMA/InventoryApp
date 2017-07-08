@@ -22,28 +22,28 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        String SQL_CREATE_ITEM_TABLE = "CREATE TABLE " + InventoryContact.ItemEntry.TABLE_NAME + " ("
-                + InventoryContact.ItemEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, "
-                + InventoryContact.ItemEntry.COLUMN_NAME + " TEXT NOT NULL, "
-                + InventoryContact.ItemEntry.COLUMN_STOCK + " INTEGER NOT NULL, "
-                + InventoryContact.ItemEntry.COLUMN_VALUE + " INTEGER NOT NULL, "
-                + InventoryContact.ItemEntry.COLUMN_SALES + " INTEGER NOT NULL DEFAULT 0, "
-                + InventoryContact.ItemEntry.COLUMN_IMG_BYTES + " BLOB NOT NULL );";
+        String SQL_CREATE_ITEM_TABLE = "CREATE TABLE " + InventoryAppTable.ItemEntry.TABLE_NAME + " ("
+                + InventoryAppTable.ItemEntry._ID + " INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, "
+                + InventoryAppTable.ItemEntry.COLUMN_NAME + " TEXT NOT NULL, "
+                + InventoryAppTable.ItemEntry.COLUMN_STOCK + " INTEGER NOT NULL, "
+                + InventoryAppTable.ItemEntry.COLUMN_VALUE + " INTEGER NOT NULL, "
+                + InventoryAppTable.ItemEntry.COLUMN_SALES + " INTEGER NOT NULL DEFAULT 0, "
+                + InventoryAppTable.ItemEntry.COLUMN_IMG_BYTES + " BLOB NOT NULL );";
 
         db.execSQL(SQL_CREATE_ITEM_TABLE);
 
 
-        String SOL_CREATE_SUPPLIER_TABLE = "CREATE TABLE " + InventoryContact.SupplierEntry.TABLE_NAME + " ("
-                + InventoryContact.SupplierEntry.ID + "  INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, "
-                + InventoryContact.SupplierEntry.COLUMN_NAME + " TEXT NOT NULL, "
-                + InventoryContact.SupplierEntry.COLUMN_EMAIL + " TEXT NOT NULL );";
+        String SOL_CREATE_SUPPLIER_TABLE = "CREATE TABLE " + InventoryAppTable.SupplierEntry.TABLE_NAME + " ("
+                + InventoryAppTable.SupplierEntry.ID + "  INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE, "
+                + InventoryAppTable.SupplierEntry.COLUMN_NAME + " TEXT NOT NULL, "
+                + InventoryAppTable.SupplierEntry.COLUMN_EMAIL + " TEXT NOT NULL );";
 
         db.execSQL(SOL_CREATE_SUPPLIER_TABLE);
 
 
-        String SQL_CREATE_ITEM_SUPPLIER_TABLE = "CREATE TABLE " + InventoryContact.ItemSupplierEntry.TABLE_NAME + " ("
-                + InventoryContact.ItemSupplierEntry.ID_ITEM + " INTEGER , "
-                + InventoryContact.ItemSupplierEntry.ID_SUPPLIER + " INTEGER );";
+        String SQL_CREATE_ITEM_SUPPLIER_TABLE = "CREATE TABLE " + InventoryAppTable.ItemSupplierEntry.TABLE_NAME + " ("
+                + InventoryAppTable.ItemSupplierEntry.ID_ITEM + " INTEGER , "
+                + InventoryAppTable.ItemSupplierEntry.ID_SUPPLIER + " INTEGER );";
 
         db.execSQL(SQL_CREATE_ITEM_SUPPLIER_TABLE);
 

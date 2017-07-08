@@ -18,7 +18,7 @@ import android.widget.ListView;
 
 import adapter.ItemCursorAdapter;
 import constactpack.AppConstants;
-import data.InventoryContact;
+import data.InventoryAppTable;
 import data.ItemDAO;
 import data.ItemDAOImpl;
 import model.Item;
@@ -57,7 +57,7 @@ public class CatalogItemActivity extends AppCompatActivity implements LoaderMana
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(CatalogItemActivity.this, EditorItemActivity.class);
                 Log.e("TAG", "in the onItemClickListener " + id);
-                Uri editUri = Uri.withAppendedPath(InventoryContact.ItemEntry.CONTENT_URI, id + "");
+                Uri editUri = Uri.withAppendedPath(InventoryAppTable.ItemEntry.CONTENT_URI, id + "");
                 intent.setData(editUri);
                 intent.putExtra(AppConstants.ID_ITEM, id);
                 startActivity(intent);
@@ -136,7 +136,7 @@ public class CatalogItemActivity extends AppCompatActivity implements LoaderMana
     private void deleteAllPets() {
 
         ItemDAO<Item> inventoryDAO = new ItemDAOImpl();
-        inventoryDAO.deleteAllItems(getContentResolver(), InventoryContact.ItemEntry.CONTENT_URI);
+        inventoryDAO.deleteAllItems(getContentResolver(), InventoryAppTable.ItemEntry.CONTENT_URI);
     }
 
 
@@ -149,7 +149,7 @@ public class CatalogItemActivity extends AppCompatActivity implements LoaderMana
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
-        return new CursorLoader(this, InventoryContact.ItemEntry.CONTENT_URI, null, null, null, null);
+        return new CursorLoader(this, InventoryAppTable.ItemEntry.CONTENT_URI, null, null, null, null);
     }
 
     @Override

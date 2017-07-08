@@ -13,7 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import data.InventoryContact;
+import data.InventoryAppTable;
 import data.SupplierDAO;
 import data.SupplierDAOImpl;
 import model.Supplier;
@@ -87,7 +87,7 @@ public class CatalogSupplierActivity extends AppCompatActivity implements Loader
     private void deleteAllSuppliers() {
 
         SupplierDAO<Supplier> supplierDAO = new SupplierDAOImpl();
-        supplierDAO.deleteAllItems(getContentResolver(), InventoryContact.SupplierEntry.CONTENT_URI);
+        supplierDAO.deleteAllItems(getContentResolver(), InventoryAppTable.SupplierEntry.CONTENT_URI);
 
     }
 
@@ -104,7 +104,7 @@ public class CatalogSupplierActivity extends AppCompatActivity implements Loader
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(this, InventoryContact.SupplierEntry.CONTENT_URI, null, null, null, null);
+        return new CursorLoader(this, InventoryAppTable.SupplierEntry.CONTENT_URI, null, null, null, null);
     }
 
     @Override

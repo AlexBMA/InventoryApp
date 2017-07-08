@@ -9,6 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 
 /**
  * Created by Alexandru on 6/17/2017.
@@ -33,8 +34,8 @@ public class SupplierProvider extends ContentProvider {
         // should recognize. All paths added to the UriMatcher have a corresponding code to return
         // when a match is found.
 
-        sUriMatcher.addURI(InventoryContact.SupplierEntry.CONTENT_AUTHORITY, InventoryContact.SupplierEntry.PATH_ITEMS, SUPPLIERS);
-        sUriMatcher.addURI(InventoryContact.SupplierEntry.CONTENT_AUTHORITY, InventoryContact.SupplierEntry.PATH_ITEMS + "/#", SUPPLIER_ID);
+        sUriMatcher.addURI(InventoryAppTable.SupplierEntry.CONTENT_AUTHORITY, InventoryAppTable.SupplierEntry.PATH_ITEMS, SUPPLIERS);
+        sUriMatcher.addURI(InventoryAppTable.SupplierEntry.CONTENT_AUTHORITY, InventoryAppTable.SupplierEntry.PATH_ITEMS + "/#", SUPPLIER_ID);
     }
 
     private InventoryDbHelper mDbHelper;
@@ -55,12 +56,12 @@ public class SupplierProvider extends ContentProvider {
 
         switch (match) {
             case SUPPLIERS:
-                cursor = database.query(InventoryContact.SupplierEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                cursor = database.query(InventoryAppTable.SupplierEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             case SUPPLIER_ID:
-                selection = InventoryContact.SupplierEntry._ID + "=?";
+                selection = InventoryAppTable.SupplierEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                cursor = database.query(InventoryContact.SupplierEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                cursor = database.query(InventoryAppTable.SupplierEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             default:
                 throw new IllegalArgumentException("Cannot query unknown uri" + uri);
@@ -73,22 +74,54 @@ public class SupplierProvider extends ContentProvider {
     @Nullable
     @Override
     public String getType(@NonNull Uri uri) {
-        return null;
+        final int match = sUriMatcher.match(uri);
+
+        switch (match) {
+            case SUPPLIERS:
+                return InventoryAppTable.SupplierEntry.CONTENT_LIST_TYPE;
+            case SUPPLIER_ID:
+                return InventoryAppTable.SupplierEntry.CONTENT_ITEM_TYPE;
+            default:
+                throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
+        }
+
     }
 
     @Nullable
     @Override
     public Uri insert(@NonNull Uri uri, @Nullable ContentValues values) {
 
+        SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
-        return null;
+        long newId = database.insert(InventoryAppTable.SupplierEntry.TABLE_NAME, null, values);
+
+        if (newId == -1) {
+            Log.e(LOG_TAG, "Failed to insert row for " + uri);
+            return null;
+        }
+
+        getContext().getContentResolver().notifyChange(uri, null);
+
+        return ContentUris.withAppendedId(uri, newId);
     }
 
     @Override
     public int delete(@NonNull Uri uri, @Nullable String selection, @Nullable String[] selectionArgs) {
 
+        SQLiteDatabase database = mDbHelper.getReadableDatabase();
+        int match = sUriMatcher.match(uri);
 
-        return 0;
+        switch (match) {
+            case SUPPLIERS:
+                int rezDeleteAll = database.delete(InventoryAppTable.SupplierEntry.TABLE_NAME, null, null);
+                if (rezDeleteAll != 0) getContext().getContentResolver().notifyChange(uri, null);
+                return rezDeleteAll;
+
+            //case SUPPLIER_ID:
+            default:
+                throw new IllegalArgumentException("Deletion is not supported for " + uri);
+        }
+
     }
 
     @Override

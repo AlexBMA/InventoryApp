@@ -36,8 +36,8 @@ public class ItemProvider extends ContentProvider {
         // should recognize. All paths added to the UriMatcher have a corresponding code to return
         // when a match is found.
 
-        sUriMatcher.addURI(InventoryContact.ItemEntry.CONTENT_AUTHORITY, InventoryContact.ItemEntry.PATH_ITEMS, ITEMS);
-        sUriMatcher.addURI(InventoryContact.ItemEntry.CONTENT_AUTHORITY, InventoryContact.ItemEntry.PATH_ITEMS + "/#", ITEM_ID);
+        sUriMatcher.addURI(InventoryAppTable.ItemEntry.CONTENT_AUTHORITY, InventoryAppTable.ItemEntry.PATH_ITEMS, ITEMS);
+        sUriMatcher.addURI(InventoryAppTable.ItemEntry.CONTENT_AUTHORITY, InventoryAppTable.ItemEntry.PATH_ITEMS + "/#", ITEM_ID);
     }
 
     private InventoryDbHelper mDbHelper;
@@ -59,12 +59,12 @@ public class ItemProvider extends ContentProvider {
 
         switch (match) {
             case ITEMS:
-                cursor = database.query(InventoryContact.ItemEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                cursor = database.query(InventoryAppTable.ItemEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             case ITEM_ID:
-                selection = InventoryContact.ItemEntry._ID + "=?";
+                selection = InventoryAppTable.ItemEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                cursor = database.query(InventoryContact.ItemEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                cursor = database.query(InventoryAppTable.ItemEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             default:
                 throw new IllegalArgumentException("Cannot query unknown uri" + uri);
@@ -74,7 +74,7 @@ public class ItemProvider extends ContentProvider {
         return cursor;
 
 
-        //Cursor cursor = database.query(InventoryContact.ItemEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+        //Cursor cursor = database.query(InventoryAppTable.ItemEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
         // cursor.setNotificationUri(getContext().getContentResolver(), uri);
 
     }
@@ -87,9 +87,9 @@ public class ItemProvider extends ContentProvider {
 
         switch (match) {
             case ITEMS:
-                return InventoryContact.ItemEntry.CONTENT_LIST_TYPE;
+                return InventoryAppTable.ItemEntry.CONTENT_LIST_TYPE;
             case ITEM_ID:
-                return InventoryContact.ItemEntry.CONTENT_ITEM_TYPE;
+                return InventoryAppTable.ItemEntry.CONTENT_ITEM_TYPE;
             default:
                 throw new IllegalStateException("Unknown URI " + uri + " with match " + match);
         }
@@ -102,7 +102,7 @@ public class ItemProvider extends ContentProvider {
 
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
 
-        long newId = database.insert(InventoryContact.ItemEntry.TABLE_NAME, null, values);
+        long newId = database.insert(InventoryAppTable.ItemEntry.TABLE_NAME, null, values);
 
         if (newId == -1) {
             Log.e(LOG_TAG, "Failed to insert row for " + uri);
@@ -122,13 +122,13 @@ public class ItemProvider extends ContentProvider {
 
         switch (match) {
             case ITEMS:
-                int rezDeleteAll = database.delete(InventoryContact.ItemEntry.TABLE_NAME, null, null);
+                int rezDeleteAll = database.delete(InventoryAppTable.ItemEntry.TABLE_NAME, null, null);
                 if (rezDeleteAll != 0) getContext().getContentResolver().notifyChange(uri, null);
                 return rezDeleteAll;
             case ITEM_ID:
-                selection = InventoryContact.ItemEntry._ID + "=?";
+                selection = InventoryAppTable.ItemEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
-                int rezDeleteById = database.delete(InventoryContact.ItemEntry.TABLE_NAME, selection, selectionArgs);
+                int rezDeleteById = database.delete(InventoryAppTable.ItemEntry.TABLE_NAME, selection, selectionArgs);
                 if (rezDeleteById != 0) getContext().getContentResolver().notifyChange(uri, null);
                 return rezDeleteById;
             default:
@@ -151,7 +151,7 @@ public class ItemProvider extends ContentProvider {
                 // For the PET_ID code, extract out the ID from the URI,
                 // so we know which row to update. Selection will be "_id=?" and selection
                 // arguments will be a String array containing the actual ID.
-                selection = InventoryContact.ItemEntry._ID + "=?";
+                selection = InventoryAppTable.ItemEntry._ID + "=?";
                 selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
                 return updatePet(uri, values, selection, selectionArgs);
             default:
@@ -167,7 +167,7 @@ public class ItemProvider extends ContentProvider {
         }
 
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
-        int nrRows = database.update(InventoryContact.ItemEntry.TABLE_NAME, values, selection, selectionArgs);
+        int nrRows = database.update(InventoryAppTable.ItemEntry.TABLE_NAME, values, selection, selectionArgs);
 
         if (nrRows != 0) getContext().getContentResolver().notifyChange(uri, null);
 
