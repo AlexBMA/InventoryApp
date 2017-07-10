@@ -12,7 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 
+import adapter.SupplierCursorAdapter;
 import data.InventoryAppTable;
 import data.SupplierDAO;
 import data.SupplierDAOImpl;
@@ -21,6 +23,8 @@ import model.Supplier;
 public class CatalogSupplierActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
 
+    private static final int LOADER_INDEX = 1;
+    private SupplierCursorAdapter supplierCursorAdapter;
     private Uri selectedItemUri;
 
     @Override
@@ -31,6 +35,7 @@ public class CatalogSupplierActivity extends AppCompatActivity implements Loader
 
         Intent intent = getIntent();
         selectedItemUri = intent.getData();
+
 
 
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.button_add_supplier);
@@ -44,12 +49,18 @@ public class CatalogSupplierActivity extends AppCompatActivity implements Loader
             }
         });
 
+        supplierCursorAdapter = new SupplierCursorAdapter(this, null);
+        ListView listViewSupplierCatalog = (ListView) findViewById(R.id.list_supplier);
+        listViewSupplierCatalog.setAdapter(supplierCursorAdapter);
+
        /* case android.R.id.home:
         {
             NavUtils.navigateUpFromSameTask(EditorItemActivity.this);
             return  true;
         }
         */
+
+        getLoaderManager().initLoader(LOADER_INDEX, null, this);
     }
 
 
@@ -109,11 +120,12 @@ public class CatalogSupplierActivity extends AppCompatActivity implements Loader
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        supplierCursorAdapter.swapCursor(data);
 
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-
+        supplierCursorAdapter.swapCursor(null);
     }
 }

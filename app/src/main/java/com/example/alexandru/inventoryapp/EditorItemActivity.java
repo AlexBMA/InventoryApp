@@ -220,6 +220,10 @@ public class EditorItemActivity extends AppCompatActivity implements LoaderManag
             ItemDAO<Item> inventoryDAO = new ItemDAOImpl();
             Uri newUriItem = inventoryDAO.insertItem(getContentResolver(), InventoryAppTable.ItemEntry.CONTENT_URI, tempItem);
 
+            Intent intent = new Intent(this, CatalogSupplierActivity.class);
+            intent.setData(newUriItem);
+
+            intent.putExtra(AppConstants.ID_ITEM, id);
         }
 
 
