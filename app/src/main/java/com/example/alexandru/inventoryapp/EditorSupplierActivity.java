@@ -71,6 +71,8 @@ public class EditorSupplierActivity extends AppCompatActivity {
         ItemSupplierDAO<ItemSupplier> itemSupplierDAO = new ItemSupplierDAOImpl();
         itemSupplierDAO.insertItem(getContentResolver(), InventoryAppTable.ItemSupplierEntry.CONTENT_URI, itemSupplier);
 
+        finish();
+
         Log.e(LOG_TAG, "here at the end");
 
     }

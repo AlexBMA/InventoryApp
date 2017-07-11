@@ -15,9 +15,12 @@ import android.view.View;
 import android.widget.ListView;
 
 import adapter.SupplierCursorAdapter;
+import dao.ItemSupplierDAO;
 import dao.SupplierDAO;
+import daoImpl.ItemSupplierDAOImpl;
 import daoImpl.SupplierDAOImpl;
 import data.InventoryAppTable;
+import model.ItemSupplier;
 import model.Supplier;
 
 public class CatalogSupplierActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -98,8 +101,12 @@ public class CatalogSupplierActivity extends AppCompatActivity implements Loader
 
     private void deleteAllSuppliers() {
 
+        ItemSupplierDAO<ItemSupplier> itemSupplierDAO = new ItemSupplierDAOImpl();
+        itemSupplierDAO.deleteAllItems(getContentResolver(), InventoryAppTable.ItemSupplierEntry.CONTENT_URI);
+
         SupplierDAO<Supplier> supplierDAO = new SupplierDAOImpl();
         supplierDAO.deleteAllItems(getContentResolver(), InventoryAppTable.SupplierEntry.CONTENT_URI);
+
 
     }
 
