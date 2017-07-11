@@ -28,13 +28,13 @@
         </activity>
 
         <provider
-            android:name="data.ItemProvider"
-            android:authorities="com.example.alexandru.data.ItemProvider"
+            android:name="providers.ItemProvider"
+            android:authorities="com.example.alexandru.providers.ItemProvider"
             android:enabled="true"
             android:exported="false" />
         <provider
-            android:name="data.SupplierProvider"
-            android:authorities="com.example.alexandru.data.SupplierProvider"
+            android:name="providers.SupplierProvider"
+            android:authorities="com.example.alexandru.providers.SupplierProvider"
             android:enabled="true"
             android:exported="false" />
 

@@ -1,4 +1,4 @@
-package data;
+package dao;
 
 /**
  * Created by Alexandru on 7/5/2017.

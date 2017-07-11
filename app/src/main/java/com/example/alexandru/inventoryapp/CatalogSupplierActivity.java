@@ -15,9 +15,9 @@ import android.view.View;
 import android.widget.ListView;
 
 import adapter.SupplierCursorAdapter;
+import dao.SupplierDAO;
+import daoImpl.SupplierDAOImpl;
 import data.InventoryAppTable;
-import data.SupplierDAO;
-import data.SupplierDAOImpl;
 import model.Supplier;
 
 public class CatalogSupplierActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {

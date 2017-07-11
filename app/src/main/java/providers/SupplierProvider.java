@@ -1,4 +1,4 @@
-package data;
+package providers;
 
 import android.content.ContentProvider;
 import android.content.ContentUris;
@@ -10,6 +10,9 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
+
+import data.InventoryAppTable;
+import data.InventoryDbHelper;
 
 /**
  * Created by Alexandru on 6/17/2017.

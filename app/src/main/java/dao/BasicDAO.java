@@ -1,4 +1,4 @@
-package data;
+package dao;
 
 import android.content.ContentResolver;
 import android.net.Uri;

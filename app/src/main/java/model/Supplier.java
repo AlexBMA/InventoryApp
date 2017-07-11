@@ -9,7 +9,6 @@ public class Supplier {
     private long id;
     private String name;
     private String email;
-    private int quantity;
 
 
     public Supplier() {
@@ -23,13 +22,6 @@ public class Supplier {
         this.id = id;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
 
     public String getName() {
         return name;
