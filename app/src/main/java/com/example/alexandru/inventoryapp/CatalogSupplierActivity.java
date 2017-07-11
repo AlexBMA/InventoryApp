@@ -50,6 +50,7 @@ public class CatalogSupplierActivity extends AppCompatActivity implements Loader
         });
 
         supplierCursorAdapter = new SupplierCursorAdapter(this, null);
+
         ListView listViewSupplierCatalog = (ListView) findViewById(R.id.list_supplier);
         listViewSupplierCatalog.setAdapter(supplierCursorAdapter);
 

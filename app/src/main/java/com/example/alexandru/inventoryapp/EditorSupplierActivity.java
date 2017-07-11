@@ -9,7 +9,9 @@ import android.view.View;
 import android.widget.EditText;
 
 import constactpack.AppConstants;
+import dao.ItemSupplierDAO;
 import dao.SupplierDAO;
+import daoImpl.ItemSupplierDAOImpl;
 import daoImpl.SupplierDAOImpl;
 import data.InventoryAppTable;
 import model.ItemSupplier;
@@ -48,9 +50,9 @@ public class EditorSupplierActivity extends AppCompatActivity {
 
 
     public void addOrUpdateSupplier(View view) {
+
         String name = nameSupplier.getText().toString();
         String email = emailSupplier.getText().toString();
-
 
         Supplier supplier = new Supplier();
         supplier.setName(name);
@@ -59,13 +61,17 @@ public class EditorSupplierActivity extends AppCompatActivity {
         SupplierDAO<Supplier> supplierDAO = new SupplierDAOImpl();
         Uri newSupplierUri = supplierDAO.insertItem(getContentResolver(), InventoryAppTable.SupplierEntry.CONTENT_URI, supplier);
 
+        Log.e(LOG_TAG, "here at middle the end");
         long supplierId = Long.parseLong(newSupplierUri.getLastPathSegment());
 
         ItemSupplier itemSupplier = new ItemSupplier();
         itemSupplier.setIdItem(id);
         itemSupplier.setIdSupplier(supplierId);
 
+        ItemSupplierDAO<ItemSupplier> itemSupplierDAO = new ItemSupplierDAOImpl();
+        itemSupplierDAO.insertItem(getContentResolver(), InventoryAppTable.ItemSupplierEntry.CONTENT_URI, itemSupplier);
 
+        Log.e(LOG_TAG, "here at the end");
 
     }
 

@@ -37,6 +37,11 @@
             android:authorities="com.example.alexandru.providers.SupplierProvider"
             android:enabled="true"
             android:exported="false" />
+        <provider
+            android:name="providers.ItemSupplierProvider"
+            android:authorities="com.example.alexandru.providers.ItemSupplierProvider"
+            android:enabled="true"
+            android:exported="false" />
 
 
         <activity android:name=".CatalogSupplierActivity"></activity>

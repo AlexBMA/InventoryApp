@@ -5,6 +5,7 @@ import android.content.ContentValues;
 import android.net.Uri;
 
 import dao.ItemSupplierDAO;
+import data.InventoryAppTable;
 import model.ItemSupplier;
 
 /**
@@ -40,6 +41,7 @@ public class ItemSupplierDAOImpl implements ItemSupplierDAO<ItemSupplier> {
     }
 
     private void transformItemInValues(ItemSupplier itemSupplier, ContentValues values) {
-
+        values.put(InventoryAppTable.ItemSupplierEntry.ID_ITEM, itemSupplier.getIdItem());
+        values.put(InventoryAppTable.ItemSupplierEntry.ID_SUPPLIER, itemSupplier.getIdSupplier());
     }
 }
