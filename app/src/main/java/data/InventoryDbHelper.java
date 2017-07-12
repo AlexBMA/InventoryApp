@@ -4,6 +4,8 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import constactpack.AppConstants;
+
 /**
  * Created by Alexandru on 6/8/2017.
  */
@@ -12,6 +14,7 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "inventory.db";
     public static final int DATABASE_VERSION = 1;
+
 
 
     public InventoryDbHelper(Context context) {
@@ -48,11 +51,13 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
 
         db.execSQL(SQL_CREATE_ITEM_SUPPLIER_TABLE);
 
-        String ITEM_SUPPLIER_VIEW = "item_supplier_view";
 
-        String SQL_CREATE_ITEM_SUPPLIER_VIEW = "CREATE VIEW " + ITEM_SUPPLIER_VIEW + " AS "
+        String SQL_CREATE_ITEM_SUPPLIER_VIEW = "CREATE VIEW " + AppConstants.ITEM_SUPPLIER_VIEW + " AS "
                 + " SELECT " + InventoryAppTable.SupplierEntry.COLUMN_NAME + ", "
-                + InventoryAppTable.SupplierEntry.COLUMN_EMAIL
+                + InventoryAppTable.SupplierEntry.COLUMN_EMAIL + ", "
+                + InventoryAppTable.SupplierEntry.ID + ", "
+                + InventoryAppTable.ItemSupplierEntry.ID_SUPPLIER + ", "
+                + InventoryAppTable.ItemSupplierEntry.ID_ITEM
                 + " FROM " + InventoryAppTable.SupplierEntry.TABLE_NAME + ", "
                 + InventoryAppTable.ItemSupplierEntry.TABLE_NAME;
 

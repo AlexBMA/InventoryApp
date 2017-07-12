@@ -4,6 +4,8 @@ import android.content.ContentResolver;
 import android.net.Uri;
 import android.provider.BaseColumns;
 
+import constactpack.AppConstants;
+
 /**
  * Created by Alexandru on 6/8/2017.
  */
@@ -84,6 +86,7 @@ public final class InventoryAppTable {
         public static final Uri BASE_CONTENT_URI = Uri.parse("content://" + CONTENT_AUTHORITY);
 
         public static final String TABLE_NAME = "supplier";
+        public static final String TABLE_NAME_VIEW_1 = AppConstants.ITEM_SUPPLIER_VIEW;
 
         public static final String ID = BaseColumns._ID;
         public static final String COLUMN_NAME = "name";

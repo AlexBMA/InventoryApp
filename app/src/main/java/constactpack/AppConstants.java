@@ -14,4 +14,7 @@ public final class AppConstants {
     public final static int INITIAL_STOCK = 10;
     public final static int INITIAL_SALES = 0;
 
+
+    public static String ITEM_SUPPLIER_VIEW = "item_supplier_view";
+
 }

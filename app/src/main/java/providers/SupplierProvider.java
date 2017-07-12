@@ -59,7 +59,7 @@ public class SupplierProvider extends ContentProvider {
 
         switch (match) {
             case SUPPLIERS:
-                cursor = database.query(InventoryAppTable.SupplierEntry.TABLE_NAME, projection, selection, selectionArgs, null, null, sortOrder);
+                cursor = database.query(InventoryAppTable.SupplierEntry.TABLE_NAME_VIEW_1, projection, selection, selectionArgs, null, null, sortOrder);
                 break;
             case SUPPLIER_ID:
                 selection = InventoryAppTable.SupplierEntry._ID + "=?";

@@ -123,7 +123,15 @@ public class CatalogSupplierActivity extends AppCompatActivity implements Loader
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        return new CursorLoader(this, InventoryAppTable.SupplierEntry.CONTENT_URI, null, null, null, null);
+
+
+        String[] projection = {InventoryAppTable.SupplierEntry.TABLE_NAME, InventoryAppTable.SupplierEntry.COLUMN_EMAIL};
+        String selection = InventoryAppTable.ItemSupplierEntry.ID_SUPPLIER
+                + " = " + InventoryAppTable.SupplierEntry.ID
+                + " AND " + InventoryAppTable.ItemSupplierEntry.ID_ITEM + " = ?";
+        String[] selectionArgs = {"" + selectedItemUri.getLastPathSegment()};
+
+        return new CursorLoader(this, InventoryAppTable.SupplierEntry.CONTENT_URI, null, selection, selectionArgs, null);
     }
 
     @Override
