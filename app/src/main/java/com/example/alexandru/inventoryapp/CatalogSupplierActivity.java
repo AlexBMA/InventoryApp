@@ -15,6 +15,7 @@ import android.view.View;
 import android.widget.ListView;
 
 import adapter.SupplierCursorAdapter;
+import constactpack.AppConstants;
 import dao.ItemSupplierDAO;
 import dao.SupplierDAO;
 import daoImpl.ItemSupplierDAOImpl;
@@ -48,6 +49,9 @@ public class CatalogSupplierActivity extends AppCompatActivity implements Loader
             public void onClick(View v) {
 
                 Intent intent = new Intent(CatalogSupplierActivity.this, EditorSupplierActivity.class);
+                intent.setData(selectedItemUri);
+                long id = Long.parseLong(selectedItemUri.getLastPathSegment());
+                intent.putExtra(AppConstants.ID_ITEM, id);
                 startActivity(intent);
             }
         });
@@ -97,6 +101,12 @@ public class CatalogSupplierActivity extends AppCompatActivity implements Loader
 
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getLoaderManager().restartLoader(LOADER_INDEX, null, this);
     }
 
     private void deleteAllSuppliers() {
