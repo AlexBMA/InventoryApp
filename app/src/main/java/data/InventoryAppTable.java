@@ -106,4 +106,6 @@ public final class InventoryAppTable {
         public static final String CONTENT_ITEM_TYPE =
                 ContentResolver.CURSOR_ITEM_BASE_TYPE + "/" + CONTENT_AUTHORITY + "/" + PATH_ITEMS;
     }
+
+
 }

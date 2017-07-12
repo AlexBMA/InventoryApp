@@ -45,7 +45,19 @@ public class InventoryDbHelper extends SQLiteOpenHelper {
                 + InventoryAppTable.ItemSupplierEntry.ID_ITEM + " INTEGER , "
                 + InventoryAppTable.ItemSupplierEntry.ID_SUPPLIER + " INTEGER );";
 
+
         db.execSQL(SQL_CREATE_ITEM_SUPPLIER_TABLE);
+
+        String ITEM_SUPPLIER_VIEW = "item_supplier_view";
+
+        String SQL_CREATE_ITEM_SUPPLIER_VIEW = "CREATE VIEW " + ITEM_SUPPLIER_VIEW + " AS "
+                + " SELECT " + InventoryAppTable.SupplierEntry.COLUMN_NAME + ", "
+                + InventoryAppTable.SupplierEntry.COLUMN_EMAIL
+                + " FROM " + InventoryAppTable.SupplierEntry.TABLE_NAME + ", "
+                + InventoryAppTable.ItemSupplierEntry.TABLE_NAME;
+
+
+        db.execSQL(SQL_CREATE_ITEM_SUPPLIER_VIEW);
 
     }
 
