@@ -27,6 +27,9 @@
     <string name="text_view_name_supplier">Supplier name</string>
     <string name="text_view_email_supplier">Supplier email</string>
 
-    <string name="edit_mode">Edit item</string>
-    <string name="add_mode">Add item</string>
+    <string name="edit_mode_item">Edit item</string>
+    <string name="add_mode_item">Add item</string>
+
+    <string name="edit_mode_supplier">Edit supplier</string>
+    <string name="add_mode_supplier">Add supplier</string>
 </resources>

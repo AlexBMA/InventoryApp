@@ -9,7 +9,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,7 +55,7 @@ public class CatalogItemActivity extends AppCompatActivity implements LoaderMana
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(CatalogItemActivity.this, EditorItemActivity.class);
-                Log.e("TAG", "in the onItemClickListener " + id);
+                //Log.e("TAG", "in the onItemClickListener " + id);
                 Uri editUri = Uri.withAppendedPath(InventoryAppTable.ItemEntry.CONTENT_URI, id + "");
                 intent.setData(editUri);
                 intent.putExtra(AppConstants.ID_ITEM, id);
@@ -88,7 +87,7 @@ public class CatalogItemActivity extends AppCompatActivity implements LoaderMana
 
                 if (selectedImageUri != null) {
 
-                    Log.e("IMG", selectedImageUri.toString());
+                    //Log.e("IMG", selectedImageUri.toString());
                     Intent intent = new Intent(CatalogItemActivity.this, EditorItemActivity.class);
                     //intent.put
                     intent.putExtra(AppConstants.IMG_URI_STRING, selectedImageUri.toString());

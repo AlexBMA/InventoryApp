@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import adapter.SupplierCursorAdapter;
@@ -60,6 +61,20 @@ public class CatalogSupplierActivity extends AppCompatActivity implements Loader
 
         ListView listViewSupplierCatalog = (ListView) findViewById(R.id.list_supplier);
         listViewSupplierCatalog.setAdapter(supplierCursorAdapter);
+
+        listViewSupplierCatalog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Intent intent = new Intent(CatalogSupplierActivity.this, EditorSupplierActivity.class);
+                intent.setData(selectedItemUri);
+                Uri editUri = Uri.withAppendedPath(InventoryAppTable.SupplierEntry.CONTENT_URI, id + "");
+                String uriSupplierString = editUri.toString();
+                intent.putExtra(AppConstants.SUPPLIER_URI, uriSupplierString);
+                startActivity(intent);
+
+            }
+        });
 
 
 

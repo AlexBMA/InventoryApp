@@ -76,7 +76,7 @@ public class EditorItemActivity extends AppCompatActivity implements LoaderManag
         String uriImgString = intent.getStringExtra(AppConstants.IMG_URI_STRING);
         if (uriImgString != null) {
 
-            setTitle(R.string.add_mode);
+            setTitle(R.string.add_mode_item);
             selectedImageUri = Uri.parse(uriImgString);
             imageView.setImageURI(selectedImageUri);
             itemStock.setText(String.valueOf(AppConstants.INITIAL_STOCK));
@@ -88,7 +88,7 @@ public class EditorItemActivity extends AppCompatActivity implements LoaderManag
 
         if (selectedItemUri != null) {
             id = intent.getLongExtra(AppConstants.ID_ITEM, -1);
-            setTitle(R.string.edit_mode);
+            setTitle(R.string.edit_mode_item);
 
         }
 

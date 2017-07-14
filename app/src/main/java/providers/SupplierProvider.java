@@ -129,6 +129,35 @@ public class SupplierProvider extends ContentProvider {
 
     @Override
     public int update(@NonNull Uri uri, @Nullable ContentValues values, @Nullable String selection, @Nullable String[] selectionArgs) {
-        return 0;
+
+
+        int match = sUriMatcher.match(uri);
+
+        switch (match) {
+            case SUPPLIERS:
+                return updatePet(uri, values, selection, selectionArgs);
+            case SUPPLIER_ID:
+                selection = InventoryAppTable.ItemEntry._ID + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                return updatePet(uri, values, selection, selectionArgs);
+            default:
+                throw new IllegalArgumentException("Update is not supported for " + uri);
+        }
+
+    }
+
+    private int updatePet(Uri uri, ContentValues values, String selection, String[] selectionArgs) {
+
+        if (values.size() == 0) {
+            return 0;
+        }
+
+        SQLiteDatabase database = mDbHelper.getWritableDatabase();
+        int nrRows = database.update(InventoryAppTable.ItemEntry.TABLE_NAME, values, selection, selectionArgs);
+
+        if (nrRows != 0) getContext().getContentResolver().notifyChange(uri, null);
+
+        return nrRows;
+
     }
 }

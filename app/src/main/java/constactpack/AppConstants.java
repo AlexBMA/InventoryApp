@@ -16,5 +16,6 @@ public final class AppConstants {
 
 
     public static String ITEM_SUPPLIER_VIEW = "item_supplier_view";
+    public static String SUPPLIER_URI = "supplierUri";
 
 }
