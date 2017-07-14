@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 
 import constactpack.AppConstants;
@@ -47,6 +48,9 @@ public class EditorSupplierActivity extends AppCompatActivity implements LoaderM
             if (uriSupplierString != null) {
                 setTitle(R.string.edit_mode_supplier);
                 selectedSupplierUri = Uri.parse(uriSupplierString);
+
+                Button button = (Button) findViewById(R.id.button_add_supplier_now);
+                button.setText(R.string.update_supplier);
 
             } else {
 

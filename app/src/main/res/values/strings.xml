@@ -17,6 +17,7 @@
 
     <string name="button_order_more">Order more </string>
     <string name="button_add_supplier">Add supplier</string>
+    <string name="update_supplier">Save update</string>
 
     <string name="text_view_price">Price</string>
     <string name="text_view_sales">Sale</string>
@@ -32,4 +33,6 @@
 
     <string name="edit_mode_supplier">Edit supplier</string>
     <string name="add_mode_supplier">Add supplier</string>
+
+
 </resources>

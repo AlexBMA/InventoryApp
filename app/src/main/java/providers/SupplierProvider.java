@@ -153,7 +153,7 @@ public class SupplierProvider extends ContentProvider {
         }
 
         SQLiteDatabase database = mDbHelper.getWritableDatabase();
-        int nrRows = database.update(InventoryAppTable.ItemEntry.TABLE_NAME, values, selection, selectionArgs);
+        int nrRows = database.update(InventoryAppTable.SupplierEntry.TABLE_NAME, values, selection, selectionArgs);
 
         if (nrRows != 0) getContext().getContentResolver().notifyChange(uri, null);
 
