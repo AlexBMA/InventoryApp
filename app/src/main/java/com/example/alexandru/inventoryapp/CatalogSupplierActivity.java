@@ -56,10 +56,13 @@ public class CatalogSupplierActivity extends AppCompatActivity implements Loader
             }
         });
 
-        supplierCursorAdapter = new SupplierCursorAdapter(this, null);
+        supplierCursorAdapter = new SupplierCursorAdapter(this, null, selectedItemUri);
 
         ListView listViewSupplierCatalog = (ListView) findViewById(R.id.list_supplier);
         listViewSupplierCatalog.setAdapter(supplierCursorAdapter);
+
+
+
 
        /* case android.R.id.home:
         {

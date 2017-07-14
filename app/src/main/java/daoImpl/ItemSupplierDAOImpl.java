@@ -16,6 +16,11 @@ public class ItemSupplierDAOImpl implements ItemSupplierDAO<ItemSupplier> {
 
 
     @Override
+    public ItemSupplier getItemById(ContentResolver contentResolver, Uri uri, long id) {
+        return null;
+    }
+
+    @Override
     public void deleteAllItems(ContentResolver contentResolver, Uri uri) {
 
     }

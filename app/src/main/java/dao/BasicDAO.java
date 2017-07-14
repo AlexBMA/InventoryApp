@@ -11,6 +11,8 @@ import android.net.Uri;
 public interface BasicDAO<E> {
 
 
+    E getItemById(ContentResolver contentResolver, Uri uri, long id);
+
     void deleteAllItems(ContentResolver contentResolver, Uri uri);
 
     void deleteItem(ContentResolver contentResolver, Uri uri, long id);

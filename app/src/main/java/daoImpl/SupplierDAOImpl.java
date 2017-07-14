@@ -15,6 +15,11 @@ import model.Supplier;
 public class SupplierDAOImpl implements SupplierDAO<Supplier> {
 
     @Override
+    public Supplier getItemById(ContentResolver contentResolver, Uri uri, long id) {
+        return null;
+    }
+
+    @Override
     public void deleteAllItems(ContentResolver contentResolver, Uri uri) {
         contentResolver.delete(uri, null, null);
     }
