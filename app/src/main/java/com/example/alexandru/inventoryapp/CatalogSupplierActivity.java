@@ -63,7 +63,6 @@ public class CatalogSupplierActivity extends AppCompatActivity implements Loader
 
 
 
-
        /* case android.R.id.home:
         {
             NavUtils.navigateUpFromSameTask(EditorItemActivity.this);

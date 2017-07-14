@@ -44,8 +44,23 @@
             android:exported="false" />
 
 
-        <activity android:name=".CatalogSupplierActivity"></activity>
-        <activity android:name=".EditorSupplierActivity"></activity>
+        <activity
+            android:name=".CatalogSupplierActivity"
+            android:parentActivityName=".CatalogItemActivity">
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CatalogItemActivity" />
+        </activity>
+        <activity
+            android:name=".EditorSupplierActivity"
+            android:parentActivityName=".CatalogSupplierActivity">
+
+            <!-- Parent activity meta-data to support 4.0 and lower -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CatalogSupplierActivity" />
+        </activity>
     </application>
 
 </manifest>

@@ -55,6 +55,7 @@ public class SupplierCursorAdapter extends CursorAdapter {
             CustomOderButtonListener customOderButtonListener = new CustomOderButtonListener(selectedItemUri, context);
             orderButton.setOnClickListener(customOderButtonListener);
 
+
         } else {
             Log.e("C", "cursor is null");
         }

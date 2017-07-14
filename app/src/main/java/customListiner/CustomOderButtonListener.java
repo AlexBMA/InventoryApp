@@ -31,6 +31,7 @@ public class CustomOderButtonListener implements View.OnClickListener {
         temp = increaseStockBy10(temp);
         itemDAO.updateItem(context.getContentResolver(), selectedItemUri, id, temp);
 
+
     }
 
     private Item increaseStockBy10(Item temp) {
@@ -39,4 +40,5 @@ public class CustomOderButtonListener implements View.OnClickListener {
         temp.setQuantity(stock);
         return temp;
     }
+
 }
