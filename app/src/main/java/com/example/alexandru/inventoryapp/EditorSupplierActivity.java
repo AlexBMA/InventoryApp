@@ -100,7 +100,6 @@ public class EditorSupplierActivity extends AppCompatActivity implements LoaderM
 
         }
 
-
         finish();
 
         Log.e(LOG_TAG, "here at the end");
@@ -138,6 +137,7 @@ public class EditorSupplierActivity extends AppCompatActivity implements LoaderM
 
 
     public void deleteMenuClick() {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage(R.string.delete_dialog_supplier_msg);
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
@@ -163,6 +163,11 @@ public class EditorSupplierActivity extends AppCompatActivity implements LoaderM
 
     private void deleteSupplier() {
 
+        if (selectedSupplierUri != null) {
+            long idSupplier = Long.parseLong(selectedSupplierUri.getLastPathSegment());
+            SupplierDAO<Supplier> supplierDAO = new SupplierDAOImpl();
+            supplierDAO.deleteItem(getContentResolver(), selectedSupplierUri, idSupplier);
+        }
 
         finish();
     }
