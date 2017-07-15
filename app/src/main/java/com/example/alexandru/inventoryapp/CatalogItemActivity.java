@@ -18,9 +18,14 @@ import android.widget.ListView;
 import adapter.ItemCursorAdapter;
 import constactpack.AppConstants;
 import dao.ItemDAO;
+import dao.ItemSupplierDAO;
+import dao.SupplierDAO;
 import daoImpl.ItemDAOImpl;
+import daoImpl.ItemSupplierDAOImpl;
+import daoImpl.SupplierDAOImpl;
 import data.InventoryAppTable;
 import model.Item;
+import model.ItemSupplier;
 
 
 public class CatalogItemActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -123,7 +128,7 @@ public class CatalogItemActivity extends AppCompatActivity implements LoaderMana
             */
             // Respond to a click on the "Delete all entries" menu option
             case R.id.action_delete_all_entries: {
-                deleteAllPets();
+                deleteAllItems();
                 return true;
             }
 
@@ -132,7 +137,13 @@ public class CatalogItemActivity extends AppCompatActivity implements LoaderMana
         return super.onOptionsItemSelected(item);
     }
 
-    private void deleteAllPets() {
+    private void deleteAllItems() {
+
+        SupplierDAO<model.Supplier> supplierDAO = new SupplierDAOImpl();
+        supplierDAO.deleteAllItems(getContentResolver(), InventoryAppTable.SupplierEntry.CONTENT_URI);
+
+        ItemSupplierDAO<ItemSupplier> itemSupplierDAO = new ItemSupplierDAOImpl();
+        itemSupplierDAO.deleteAllItems(getContentResolver(), InventoryAppTable.ItemSupplierEntry.CONTENT_URI);
 
         ItemDAO<Item> inventoryDAO = new ItemDAOImpl();
         inventoryDAO.deleteAllItems(getContentResolver(), InventoryAppTable.ItemEntry.CONTENT_URI);

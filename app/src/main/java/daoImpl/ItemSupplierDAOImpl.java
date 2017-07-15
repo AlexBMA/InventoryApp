@@ -49,4 +49,18 @@ public class ItemSupplierDAOImpl implements ItemSupplierDAO<ItemSupplier> {
         values.put(InventoryAppTable.ItemSupplierEntry.ID_ITEM, itemSupplier.getIdItem());
         values.put(InventoryAppTable.ItemSupplierEntry.ID_SUPPLIER, itemSupplier.getIdSupplier());
     }
+
+    @Override
+    public void deleteByItemId(ContentResolver contentResolver, Uri uri, long id) {
+
+
+    }
+
+    @Override
+    public void deleteBySupplierId(ContentResolver contentResolver, Uri uri, long id) {
+
+        String selection = InventoryAppTable.ItemSupplierEntry.ID_SUPPLIER + " = ?";
+        String[] selectionArgs = {id + ""};
+        contentResolver.delete(uri, selection, selectionArgs);
+    }
 }

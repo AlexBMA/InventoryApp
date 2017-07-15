@@ -92,7 +92,11 @@ public class ItemSupplierProvider extends ContentProvider {
                 int rezDeleteAll = database.delete(InventoryAppTable.SupplierEntry.TABLE_NAME, null, null);
                 if (rezDeleteAll != 0) getContext().getContentResolver().notifyChange(uri, null);
                 return rezDeleteAll;
-
+            case ITEM_SUPPLIER_ID:
+                selection = InventoryAppTable.ItemSupplierEntry.ID_SUPPLIER + "=?";
+                selectionArgs = new String[]{String.valueOf(ContentUris.parseId(uri))};
+                int rezDeleteById = database.delete(InventoryAppTable.ItemSupplierEntry.TABLE_NAME, selection, selectionArgs);
+                if (rezDeleteById != 0) getContext().getContentResolver().notifyChange(uri, null);
             default:
                 throw new IllegalArgumentException("Deletion is not supported for " + uri);
         }

@@ -26,10 +26,13 @@ import java.io.InputStream;
 
 import constactpack.AppConstants;
 import dao.ItemDAO;
+import dao.ItemSupplierDAO;
 import daoImpl.ItemDAOImpl;
+import daoImpl.ItemSupplierDAOImpl;
 import data.InventoryAppTable;
 import helperpack.Utils;
 import model.Item;
+import model.ItemSupplier;
 
 public class EditorItemActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
@@ -116,7 +119,7 @@ public class EditorItemActivity extends AppCompatActivity implements LoaderManag
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_edtior, menu);
+        getMenuInflater().inflate(R.menu.menu_edtior_item, menu);
         return true;
     }
 
@@ -147,12 +150,12 @@ public class EditorItemActivity extends AppCompatActivity implements LoaderManag
     }
 
     public void deleteButtonClick(View view) {
-        Log.e("TAG", "delete button pressed");
+        //Log.e("TAG", "delete button pressed");
 
         // Create an AlertDialog.Builder and set the message, and click listeners
         // for the positive and negative buttons on the dialog.
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage(R.string.delete_dialog_msg);
+        builder.setMessage(R.string.delete_dialog_item_msg);
         builder.setPositiveButton(R.string.delete, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -178,6 +181,10 @@ public class EditorItemActivity extends AppCompatActivity implements LoaderManag
     private void deleteItem() {
 
         if (id > -1) {
+
+            ItemSupplierDAO<ItemSupplier> itemSupplier = new ItemSupplierDAOImpl();
+
+
             ItemDAO<Item> inventoryDAO = new ItemDAOImpl();
             inventoryDAO.deleteItem(getContentResolver(), selectedItemUri, id);
         }
@@ -188,14 +195,15 @@ public class EditorItemActivity extends AppCompatActivity implements LoaderManag
 
         String name = itemName.getText().toString();
         int value = Integer.parseInt(itemPrice.getText().toString());
-
-
+        int stock = Integer.parseInt(itemStock.getText().toString());
+        int sales = Integer.parseInt(itemSales.getText().toString());
         Item tempItem = new Item();
 
+
         tempItem.setName(name);
-        tempItem.setQuantity(AppConstants.INITIAL_STOCK);
+        tempItem.setQuantity(stock);
         tempItem.setPrice(value);
-        tempItem.setSales(AppConstants.INITIAL_SALES);
+        tempItem.setSales(sales);
 
         if (selectedImageUri != null) {
             byte[] imgBytes = getImgFromUri(selectedImageUri);

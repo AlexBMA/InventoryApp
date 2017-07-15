@@ -26,7 +26,7 @@ public class SupplierDAOImpl implements SupplierDAO<Supplier> {
 
     @Override
     public void deleteItem(ContentResolver contentResolver, Uri uri, long id) {
-        String selection = InventoryAppTable.ItemEntry._ID + " = ?";
+        String selection = InventoryAppTable.SupplierEntry._ID + " = ?";
         String[] selectionArgs = {id + ""};
         contentResolver.delete(uri, selection, selectionArgs);
     }
@@ -46,7 +46,7 @@ public class SupplierDAOImpl implements SupplierDAO<Supplier> {
 
         ContentValues values = new ContentValues();
         transformItemInValues(supplier, values);
-        String selection = InventoryAppTable.ItemEntry._ID + " = ?";
+        String selection = InventoryAppTable.SupplierEntry._ID + " = ?";
         String[] selectionArgs = {id + ""};
         contentResolver.update(uri, values, selection, selectionArgs);
 
