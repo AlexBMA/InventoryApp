@@ -19,7 +19,7 @@
             android:textAppearance="?android:textAppearanceMedium" />
 
         <EditText
-            android:id="@+id/edit_text_name_supplier"
+            android:id="@+id/et_name_supplier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -40,7 +40,7 @@
             android:textAppearance="?android:textAppearanceMedium" />
 
         <EditText
-            android:id="@+id/edit_text_email_supplier"
+            android:id="@+id/et_email_supplier"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -49,7 +49,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button_add_supplier_now"
+        android:id="@+id/b_add_supplier_now"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="addOrUpdateSupplier"

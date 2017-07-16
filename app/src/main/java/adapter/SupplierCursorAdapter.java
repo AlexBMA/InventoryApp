@@ -39,10 +39,10 @@ public class SupplierCursorAdapter extends CursorAdapter {
     @Override
     public void bindView(View view, Context context, Cursor cursor) {
 
-        TextView supplierName = (TextView) view.findViewById(R.id.text_view_supplier_name);
-        TextView supplierEmail = (TextView) view.findViewById(R.id.text_view_supplier_email);
+        TextView supplierName = (TextView) view.findViewById(R.id.tv_supplier_name);
+        TextView supplierEmail = (TextView) view.findViewById(R.id.tv_supplier_email);
 
-        Button orderButton = (Button) view.findViewById(R.id.button_order_more);
+        Button orderButton = (Button) view.findViewById(R.id.b_order_more);
 
 
         if (cursor != null) {

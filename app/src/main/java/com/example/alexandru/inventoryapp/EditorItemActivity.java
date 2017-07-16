@@ -61,16 +61,15 @@ public class EditorItemActivity extends AppCompatActivity implements LoaderManag
         setContentView(R.layout.activity_item_editor);
 
 
+        itemName = (EditText) findViewById(R.id.et_item_name);
+        itemPrice = (EditText) findViewById(R.id.et_item_price);
 
-        itemName = (EditText) findViewById(R.id.edit_item_name);
-        itemPrice = (EditText) findViewById(R.id.edit_item_price);
+        itemStock = (TextView) findViewById(R.id.tv_item_stock);
+        itemSales = (TextView) findViewById(R.id.tv_item_sales);
+        imageView = (ImageView) findViewById(R.id.iv_item);
 
-        itemStock = (TextView) findViewById(R.id.text_view_item_stock);
-        itemSales = (TextView) findViewById(R.id.text_view_item_sales);
-        imageView = (ImageView) findViewById(R.id.image_view_item);
-
-        orderButton = (Button) findViewById(R.id.button_order);
-        deleteButton = (Button) findViewById(R.id.button_delete);
+        orderButton = (Button) findViewById(R.id.b_order);
+        deleteButton = (Button) findViewById(R.id.b_delete);
 
         Intent intent = getIntent();
         selectedItemUri = intent.getData();

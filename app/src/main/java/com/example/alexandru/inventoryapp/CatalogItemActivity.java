@@ -39,7 +39,7 @@ public class CatalogItemActivity extends AppCompatActivity implements LoaderMana
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item_catalog);
         setTitle(R.string.item_catalog_title);
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.button_add);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.b_add_item);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

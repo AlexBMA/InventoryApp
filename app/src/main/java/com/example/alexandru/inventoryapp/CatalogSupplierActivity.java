@@ -42,8 +42,7 @@ public class CatalogSupplierActivity extends AppCompatActivity implements Loader
         selectedItemUri = intent.getData();
 
 
-
-        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.button_add_supplier);
+        FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.b_add_supplier);
 
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override

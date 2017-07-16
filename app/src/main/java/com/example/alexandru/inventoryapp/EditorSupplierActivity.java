@@ -53,7 +53,7 @@ public class EditorSupplierActivity extends AppCompatActivity implements LoaderM
                 setTitle(R.string.edit_mode_supplier);
                 selectedSupplierUri = Uri.parse(uriSupplierString);
 
-                Button button = (Button) findViewById(R.id.button_add_supplier_now);
+                Button button = (Button) findViewById(R.id.b_add_supplier_now);
                 button.setText(R.string.update_supplier);
 
             } else {
@@ -62,8 +62,8 @@ public class EditorSupplierActivity extends AppCompatActivity implements LoaderM
             }
         }
 
-        nameSupplier = (EditText) findViewById(R.id.edit_text_name_supplier);
-        emailSupplier = (EditText) findViewById(R.id.edit_text_email_supplier);
+        nameSupplier = (EditText) findViewById(R.id.et_name_supplier);
+        emailSupplier = (EditText) findViewById(R.id.et_email_supplier);
 
         getLoaderManager().initLoader(LOADER_INDEX, null, this);
     }
