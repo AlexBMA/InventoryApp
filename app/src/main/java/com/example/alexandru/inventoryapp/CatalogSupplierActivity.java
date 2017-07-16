@@ -29,8 +29,8 @@ public class CatalogSupplierActivity extends AppCompatActivity implements Loader
 
 
     private static final int LOADER_INDEX = 1;
-    private SupplierCursorAdapter supplierCursorAdapter;
-    private Uri selectedItemUri;
+    private SupplierCursorAdapter mSupplierCursorAdapter;
+    private Uri mSelectedItemUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +39,7 @@ public class CatalogSupplierActivity extends AppCompatActivity implements Loader
         setTitle(R.string.supplier_catalog_tile);
 
         Intent intent = getIntent();
-        selectedItemUri = intent.getData();
+        mSelectedItemUri = intent.getData();
 
 
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.b_add_supplier);
@@ -49,24 +49,24 @@ public class CatalogSupplierActivity extends AppCompatActivity implements Loader
             public void onClick(View v) {
 
                 Intent intent = new Intent(CatalogSupplierActivity.this, EditorSupplierActivity.class);
-                intent.setData(selectedItemUri);
-                long id = Long.parseLong(selectedItemUri.getLastPathSegment());
+                intent.setData(mSelectedItemUri);
+                long id = Long.parseLong(mSelectedItemUri.getLastPathSegment());
                 intent.putExtra(AppConstants.ID_ITEM, id);
                 startActivity(intent);
             }
         });
 
-        supplierCursorAdapter = new SupplierCursorAdapter(this, null, selectedItemUri);
+        mSupplierCursorAdapter = new SupplierCursorAdapter(this, null, mSelectedItemUri);
 
         ListView listViewSupplierCatalog = (ListView) findViewById(R.id.list_supplier);
-        listViewSupplierCatalog.setAdapter(supplierCursorAdapter);
+        listViewSupplierCatalog.setAdapter(mSupplierCursorAdapter);
 
         listViewSupplierCatalog.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 Intent intent = new Intent(CatalogSupplierActivity.this, EditorSupplierActivity.class);
-                intent.setData(selectedItemUri);
+                intent.setData(mSelectedItemUri);
                 Uri editUri = Uri.withAppendedPath(InventoryAppTable.SupplierEntry.CONTENT_URI, id + "");
                 String uriSupplierString = editUri.toString();
                 intent.putExtra(AppConstants.SUPPLIER_URI, uriSupplierString);
@@ -140,7 +140,7 @@ public class CatalogSupplierActivity extends AppCompatActivity implements Loader
     public void onBackPressed() {
         // Log.e("TAG ", "HERE in BACK");
         Intent intent = new Intent();
-        intent.setData(selectedItemUri);
+        intent.setData(mSelectedItemUri);
         setResult(RESULT_OK, intent);
         super.onBackPressed();
         return;
@@ -155,19 +155,19 @@ public class CatalogSupplierActivity extends AppCompatActivity implements Loader
         String selection = InventoryAppTable.ItemSupplierEntry.ID_SUPPLIER
                 + " = " + InventoryAppTable.SupplierEntry.ID
                 + " AND " + InventoryAppTable.ItemSupplierEntry.ID_ITEM + " = ?";
-        String[] selectionArgs = {"" + selectedItemUri.getLastPathSegment()};
+        String[] selectionArgs = {"" + mSelectedItemUri.getLastPathSegment()};
 
         return new CursorLoader(this, InventoryAppTable.SupplierEntry.CONTENT_URI, null, selection, selectionArgs, null);
     }
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        supplierCursorAdapter.swapCursor(data);
+        mSupplierCursorAdapter.swapCursor(data);
 
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        supplierCursorAdapter.swapCursor(null);
+        mSupplierCursorAdapter.swapCursor(null);
     }
 }

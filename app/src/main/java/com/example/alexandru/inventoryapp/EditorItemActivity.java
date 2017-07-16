@@ -38,21 +38,21 @@ public class EditorItemActivity extends AppCompatActivity implements LoaderManag
 
     private static final int LOADER_INDEX = 1;
 
-    protected EditText itemName;
-    protected EditText itemPrice;
+    protected EditText mItemName;
+    protected EditText mItemPrice;
 
-    protected TextView itemSales;
-    protected TextView itemStock;
-    protected ImageView imageView;
+    protected TextView mItemSales;
+    protected TextView mItemStock;
+    protected ImageView mImageView;
 
-    protected Button orderButton;
-    protected Button deleteButton;
+    protected Button mOrderButton;
+    protected Button mDeleteButton;
 
     private long id = -1;
-    private Bitmap image;
+    private Bitmap mImage;
 
-    private Uri selectedImageUri;
-    private Uri selectedItemUri;
+    private Uri mSelectedImageUri;
+    private Uri mSelectedItemUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,34 +61,34 @@ public class EditorItemActivity extends AppCompatActivity implements LoaderManag
         setContentView(R.layout.activity_item_editor);
 
 
-        itemName = (EditText) findViewById(R.id.et_item_name);
-        itemPrice = (EditText) findViewById(R.id.et_item_price);
+        mItemName = (EditText) findViewById(R.id.et_item_name);
+        mItemPrice = (EditText) findViewById(R.id.et_item_price);
 
-        itemStock = (TextView) findViewById(R.id.tv_item_stock);
-        itemSales = (TextView) findViewById(R.id.tv_item_sales);
-        imageView = (ImageView) findViewById(R.id.iv_item);
+        mItemStock = (TextView) findViewById(R.id.tv_item_stock);
+        mItemSales = (TextView) findViewById(R.id.tv_item_sales);
+        mImageView = (ImageView) findViewById(R.id.iv_item);
 
-        orderButton = (Button) findViewById(R.id.b_order);
-        deleteButton = (Button) findViewById(R.id.b_delete);
+        mOrderButton = (Button) findViewById(R.id.b_order);
+        mDeleteButton = (Button) findViewById(R.id.b_delete);
 
         Intent intent = getIntent();
-        selectedItemUri = intent.getData();
+        mSelectedItemUri = intent.getData();
 
 
         String uriImgString = intent.getStringExtra(AppConstants.IMG_URI_STRING);
         if (uriImgString != null) {
 
             setTitle(R.string.add_mode_item);
-            selectedImageUri = Uri.parse(uriImgString);
-            imageView.setImageURI(selectedImageUri);
-            itemStock.setText(String.valueOf(AppConstants.INITIAL_STOCK));
-            itemSales.setText(String.valueOf(AppConstants.INITIAL_SALES));
+            mSelectedImageUri = Uri.parse(uriImgString);
+            mImageView.setImageURI(mSelectedImageUri);
+            mItemStock.setText(String.valueOf(AppConstants.INITIAL_STOCK));
+            mItemSales.setText(String.valueOf(AppConstants.INITIAL_SALES));
 
-            orderButton.setVisibility(Button.GONE);
-            deleteButton.setVisibility(Button.GONE);
+            mOrderButton.setVisibility(Button.GONE);
+            mDeleteButton.setVisibility(Button.GONE);
         }
 
-        if (selectedItemUri != null) {
+        if (mSelectedItemUri != null) {
             id = intent.getLongExtra(AppConstants.ID_ITEM, -1);
             setTitle(R.string.edit_mode_item);
 
@@ -185,17 +185,17 @@ public class EditorItemActivity extends AppCompatActivity implements LoaderManag
 
 
             ItemDAO<Item> inventoryDAO = new ItemDAOImpl();
-            inventoryDAO.deleteItem(getContentResolver(), selectedItemUri, id);
+            inventoryDAO.deleteItem(getContentResolver(), mSelectedItemUri, id);
         }
         finish();
     }
 
     private void saveOrUpdateItem() {
 
-        String name = itemName.getText().toString();
-        int value = Integer.parseInt(itemPrice.getText().toString());
-        int stock = Integer.parseInt(itemStock.getText().toString());
-        int sales = Integer.parseInt(itemSales.getText().toString());
+        String name = mItemName.getText().toString();
+        int value = Integer.parseInt(mItemPrice.getText().toString());
+        int stock = Integer.parseInt(mItemStock.getText().toString());
+        int sales = Integer.parseInt(mItemSales.getText().toString());
         Item tempItem = new Item();
 
 
@@ -204,12 +204,12 @@ public class EditorItemActivity extends AppCompatActivity implements LoaderManag
         tempItem.setPrice(value);
         tempItem.setSales(sales);
 
-        if (selectedImageUri != null) {
-            byte[] imgBytes = getImgFromUri(selectedImageUri);
+        if (mSelectedImageUri != null) {
+            byte[] imgBytes = getImgFromUri(mSelectedImageUri);
             tempItem.setImgBytes(imgBytes);
             // Log.e("BYTES: from uri", imgBytes.length + "");
         } else {
-            byte[] imgBytes = Utils.getImageBytes(image);
+            byte[] imgBytes = Utils.getImageBytes(mImage);
             tempItem.setImgBytes(imgBytes);
             // Log.e("BYTES from img:", imgBytes.length + "");
         }
@@ -221,7 +221,7 @@ public class EditorItemActivity extends AppCompatActivity implements LoaderManag
             tempItem.setId(id);
 
             ItemDAO<Item> inventoryDAO = new ItemDAOImpl();
-            inventoryDAO.updateItem(getContentResolver(), selectedItemUri, id, tempItem);
+            inventoryDAO.updateItem(getContentResolver(), mSelectedItemUri, id, tempItem);
         } else {
 
             ItemDAO<Item> inventoryDAO = new ItemDAOImpl();
@@ -244,8 +244,8 @@ public class EditorItemActivity extends AppCompatActivity implements LoaderManag
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
-        if (selectedItemUri != null)
-            return new CursorLoader(this, selectedItemUri, null, null, null, null);
+        if (mSelectedItemUri != null)
+            return new CursorLoader(this, mSelectedItemUri, null, null, null, null);
 
         return null;
 
@@ -269,23 +269,23 @@ public class EditorItemActivity extends AppCompatActivity implements LoaderManag
             int sales = data.getInt(saleColumnIndex);
             byte[] imgBytes = data.getBlob(imgBytesColumnIndex);
 
-            image = Utils.getImage(imgBytes);
+            mImage = Utils.getImage(imgBytes);
 
 
-            imageView.setImageBitmap(image);
-            itemName.setText(nameItem);
-            itemSales.setText(Integer.toString(sales));
-            itemPrice.setText(Integer.toString(price));
-            itemStock.setText(Integer.toString(quantity));
+            mImageView.setImageBitmap(mImage);
+            mItemName.setText(nameItem);
+            mItemSales.setText(Integer.toString(sales));
+            mItemPrice.setText(Integer.toString(price));
+            mItemStock.setText(Integer.toString(quantity));
         }
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
-        itemName.clearComposingText();
-        itemPrice.clearComposingText();
-        itemStock.clearComposingText();
+        mItemName.clearComposingText();
+        mItemPrice.clearComposingText();
+        mItemStock.clearComposingText();
 
     }
 
@@ -293,7 +293,7 @@ public class EditorItemActivity extends AppCompatActivity implements LoaderManag
         Log.e("TAG", "order button pressed");
 
         Intent intent = new Intent(this, CatalogSupplierActivity.class);
-        intent.setData(selectedItemUri);
+        intent.setData(mSelectedItemUri);
         intent.putExtra(AppConstants.ID_ITEM, id);
         startActivityForResult(intent, 1);
 
@@ -304,9 +304,9 @@ public class EditorItemActivity extends AppCompatActivity implements LoaderManag
         if (requestCode == 1) {
             Log.e("TAG ", "HERE in <><><>");
             if (resultCode == RESULT_OK) {
-                selectedItemUri = data.getData();
+                mSelectedItemUri = data.getData();
 
-                Log.e("TAG ", selectedItemUri.toString() + "");
+                Log.e("TAG ", mSelectedItemUri.toString() + "");
             }
         }
     }

@@ -29,11 +29,11 @@ import model.Supplier;
 public class EditorSupplierActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int LOADER_INDEX = 1;
-    private EditText nameSupplier;
-    private EditText emailSupplier;
+    private EditText mNameSupplier;
+    private EditText mEmailSupplier;
     private String LOG_TAG = "ESA";
-    private Uri itemUri;
-    private Uri selectedSupplierUri;
+    private Uri mItemUri;
+    private Uri mSelectedSupplierUri;
     private long id;
 
     @Override
@@ -44,14 +44,14 @@ public class EditorSupplierActivity extends AppCompatActivity implements LoaderM
 
 
         Intent intent = getIntent();
-        itemUri = intent.getData();
-        if (itemUri != null) {
+        mItemUri = intent.getData();
+        if (mItemUri != null) {
             id = intent.getLongExtra(AppConstants.ID_ITEM, -1);
 
             String uriSupplierString = intent.getStringExtra(AppConstants.SUPPLIER_URI);
             if (uriSupplierString != null) {
                 setTitle(R.string.edit_mode_supplier);
-                selectedSupplierUri = Uri.parse(uriSupplierString);
+                mSelectedSupplierUri = Uri.parse(uriSupplierString);
 
                 Button button = (Button) findViewById(R.id.b_add_supplier_now);
                 button.setText(R.string.update_supplier);
@@ -62,8 +62,8 @@ public class EditorSupplierActivity extends AppCompatActivity implements LoaderM
             }
         }
 
-        nameSupplier = (EditText) findViewById(R.id.et_name_supplier);
-        emailSupplier = (EditText) findViewById(R.id.et_email_supplier);
+        mNameSupplier = (EditText) findViewById(R.id.et_name_supplier);
+        mEmailSupplier = (EditText) findViewById(R.id.et_email_supplier);
 
         getLoaderManager().initLoader(LOADER_INDEX, null, this);
     }
@@ -71,18 +71,18 @@ public class EditorSupplierActivity extends AppCompatActivity implements LoaderM
 
     public void addOrUpdateSupplier(View view) {
 
-        String name = nameSupplier.getText().toString();
-        String email = emailSupplier.getText().toString();
+        String name = mNameSupplier.getText().toString();
+        String email = mEmailSupplier.getText().toString();
 
         Supplier supplier = new Supplier();
         supplier.setName(name);
         supplier.setEmail(email);
 
-        if (selectedSupplierUri != null) {
-            long idSupplier = Long.parseLong(selectedSupplierUri.getLastPathSegment());
+        if (mSelectedSupplierUri != null) {
+            long idSupplier = Long.parseLong(mSelectedSupplierUri.getLastPathSegment());
             supplier.setId(idSupplier);
             SupplierDAO<Supplier> supplierDAO = new SupplierDAOImpl();
-            supplierDAO.updateItem(getContentResolver(), selectedSupplierUri, idSupplier, supplier);
+            supplierDAO.updateItem(getContentResolver(), mSelectedSupplierUri, idSupplier, supplier);
 
         } else {
             SupplierDAO<Supplier> supplierDAO = new SupplierDAOImpl();
@@ -163,18 +163,18 @@ public class EditorSupplierActivity extends AppCompatActivity implements LoaderM
 
     private void deleteSupplier() {
 
-        if (selectedSupplierUri != null) {
-            long idSupplier = Long.parseLong(selectedSupplierUri.getLastPathSegment());
+        if (mSelectedSupplierUri != null) {
+            long idSupplier = Long.parseLong(mSelectedSupplierUri.getLastPathSegment());
             SupplierDAO<Supplier> supplierDAO = new SupplierDAOImpl();
-            supplierDAO.deleteItem(getContentResolver(), selectedSupplierUri, idSupplier);
+            supplierDAO.deleteItem(getContentResolver(), mSelectedSupplierUri, idSupplier);
         }
 
         finish();
     }
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        if (selectedSupplierUri != null)
-            return new CursorLoader(this, selectedSupplierUri, null, null, null, null);
+        if (mSelectedSupplierUri != null)
+            return new CursorLoader(this, mSelectedSupplierUri, null, null, null, null);
 
         return null;
     }
@@ -186,15 +186,15 @@ public class EditorSupplierActivity extends AppCompatActivity implements LoaderM
             String name = data.getString(data.getColumnIndex(InventoryAppTable.SupplierEntry.COLUMN_NAME));
             String email = data.getColumnName(data.getColumnIndex(InventoryAppTable.SupplierEntry.COLUMN_EMAIL));
 
-            nameSupplier.setText(name);
-            emailSupplier.setText(email);
+            mNameSupplier.setText(name);
+            mEmailSupplier.setText(email);
         }
 
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        nameSupplier.clearComposingText();
-        emailSupplier.clearComposingText();
+        mNameSupplier.clearComposingText();
+        mEmailSupplier.clearComposingText();
     }
 }

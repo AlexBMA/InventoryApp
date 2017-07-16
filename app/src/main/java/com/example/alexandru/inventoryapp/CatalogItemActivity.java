@@ -32,7 +32,7 @@ public class CatalogItemActivity extends AppCompatActivity implements LoaderMana
 
     private static final int SELECT_PICTURE = 100;
     private final int LOADER_INDEX = 1;
-    private ItemCursorAdapter itemCursorAdapter;
+    private ItemCursorAdapter mItemCursorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,10 +51,10 @@ public class CatalogItemActivity extends AppCompatActivity implements LoaderMana
         });
 
 
-        itemCursorAdapter = new ItemCursorAdapter(this, null);
+        mItemCursorAdapter = new ItemCursorAdapter(this, null);
 
         ListView listView = (ListView) findViewById(R.id.list_item);
-        listView.setAdapter(itemCursorAdapter);
+        listView.setAdapter(mItemCursorAdapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -164,12 +164,12 @@ public class CatalogItemActivity extends AppCompatActivity implements LoaderMana
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        itemCursorAdapter.swapCursor(data);
+        mItemCursorAdapter.swapCursor(data);
     }
 
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
-        itemCursorAdapter.swapCursor(null);
+        mItemCursorAdapter.swapCursor(null);
     }
 
 
