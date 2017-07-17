@@ -29,11 +29,15 @@ import model.Supplier;
 public class EditorSupplierActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int LOADER_INDEX = 1;
+
     private EditText mNameSupplier;
     private EditText mEmailSupplier;
+
     private String LOG_TAG = "ESA";
+
     private Uri mItemUri;
     private Uri mSelectedSupplierUri;
+
     private long id;
 
     @Override
@@ -167,6 +171,10 @@ public class EditorSupplierActivity extends AppCompatActivity implements LoaderM
             long idSupplier = Long.parseLong(mSelectedSupplierUri.getLastPathSegment());
             SupplierDAO<Supplier> supplierDAO = new SupplierDAOImpl();
             supplierDAO.deleteItem(getContentResolver(), mSelectedSupplierUri, idSupplier);
+
+            Uri itemSupplyUri = Uri.withAppendedPath(InventoryAppTable.ItemSupplierEntry.CONTENT_URI, idSupplier + "");
+            ItemSupplierDAO<ItemSupplier> itemSupplierDAO = new ItemSupplierDAOImpl();
+            itemSupplierDAO.deleteBySupplierId(getContentResolver(), itemSupplyUri, idSupplier);
         }
 
         finish();

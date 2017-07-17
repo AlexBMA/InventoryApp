@@ -53,7 +53,9 @@ public class ItemSupplierDAOImpl implements ItemSupplierDAO<ItemSupplier> {
     @Override
     public void deleteByItemId(ContentResolver contentResolver, Uri uri, long id) {
 
-
+        String selection = InventoryAppTable.ItemSupplierEntry.ID_ITEM + " = ?";
+        String[] selectionArgs = {id + ""};
+        contentResolver.delete(uri, selection, selectionArgs);
     }
 
     @Override
