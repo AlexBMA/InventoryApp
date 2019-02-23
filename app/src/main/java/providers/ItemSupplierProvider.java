@@ -39,8 +39,8 @@ public class ItemSupplierProvider extends ContentProvider {
         // should recognize. All paths added to the UriMatcher have a corresponding code to return
         // when a match is found.
 
-        sUriMatcher.addURI(InventoryAppTable.SupplierEntry.CONTENT_AUTHORITY, InventoryAppTable.ItemSupplierEntry.PATH_ITEMS, ITEM_SUPPLIERS);
-        sUriMatcher.addURI(InventoryAppTable.SupplierEntry.CONTENT_AUTHORITY, InventoryAppTable.ItemSupplierEntry.PATH_ITEMS + "/#", ITEM_SUPPLIER_ID);
+        sUriMatcher.addURI(InventoryAppTable.ItemSupplierEntry.CONTENT_AUTHORITY, InventoryAppTable.ItemSupplierEntry.PATH_ITEMS, ITEM_SUPPLIERS);
+        sUriMatcher.addURI(InventoryAppTable.ItemSupplierEntry.CONTENT_AUTHORITY, InventoryAppTable.ItemSupplierEntry.PATH_ITEMS + "/#", ITEM_SUPPLIER_ID);
     }
 
     private InventoryDbHelper mDbHelper;
@@ -87,9 +87,10 @@ public class ItemSupplierProvider extends ContentProvider {
         SQLiteDatabase database = mDbHelper.getReadableDatabase();
         int match = sUriMatcher.match(uri);
 
+
         switch (match) {
             case ITEM_SUPPLIERS:
-                int rezDeleteAll = database.delete(InventoryAppTable.SupplierEntry.TABLE_NAME, null, null);
+                int rezDeleteAll = database.delete(InventoryAppTable.ItemSupplierEntry.TABLE_NAME, null, null);
                 if (rezDeleteAll != 0) getContext().getContentResolver().notifyChange(uri, null);
                 return rezDeleteAll;
             case ITEM_SUPPLIER_ID:

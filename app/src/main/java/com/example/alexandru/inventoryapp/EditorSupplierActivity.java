@@ -169,12 +169,15 @@ public class EditorSupplierActivity extends AppCompatActivity implements LoaderM
 
         if (mSelectedSupplierUri != null) {
             long idSupplier = Long.parseLong(mSelectedSupplierUri.getLastPathSegment());
-            SupplierDAO<Supplier> supplierDAO = new SupplierDAOImpl();
-            supplierDAO.deleteItem(getContentResolver(), mSelectedSupplierUri, idSupplier);
 
             Uri itemSupplyUri = Uri.withAppendedPath(InventoryAppTable.ItemSupplierEntry.CONTENT_URI, idSupplier + "");
             ItemSupplierDAO<ItemSupplier> itemSupplierDAO = new ItemSupplierDAOImpl();
             itemSupplierDAO.deleteBySupplierId(getContentResolver(), itemSupplyUri, idSupplier);
+
+            SupplierDAO<Supplier> supplierDAO = new SupplierDAOImpl();
+            supplierDAO.deleteItem(getContentResolver(), mSelectedSupplierUri, idSupplier);
+
+
         }
 
         finish();
